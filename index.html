@@ -1,138 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Apple Timer</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <title>Vinyoso Countdown</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
 
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
+    .container {
+      max-width: 800px;
+    }
 
-        .container {
-            text-align: center;
-        }
+    h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #fff;
-        }
+    .date {
+      opacity: 0.7;
+      margin-bottom: 40px;
+    }
 
-        .timer-face {
-            width: 400px;
-            height: 60px;
-            border: 2px solid #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            padding: 10px;
-        }
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
-        .timer-label {
-            background-color: rgba(255, 255, 255, 0.3);
-            color: #fff;
-            border-radius: 15px;
-            font-size: 1.2rem;
-            padding: 8px 16px;
-        }
+    .box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px 30px;
+      border-radius: 12px;
+      min-width: 100px;
+    }
 
-        .timer-digits {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: -10px;
-        }
+    .number {
+      font-size: 36px;
+      font-weight: bold;
+    }
 
-        .digit {
-            font-size: 4rem;
-            width: 50px;
-            height: 70px;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        button {
-            padding: 12px 30px;
-            font-size: 1.2rem;
-            background-color: #fff;
-            border: none;
-            border-radius: 20px;
-            color: #000;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .timer-digits~.digit,
-        .timer-label {
-            animation: pulse 2s infinite;
-        }
-    </style>
+    .label {
+      font-size: 14px;
+      opacity: 0.7;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Chrono Timer</h1>
-        <div class="timer-face">
-            <div class="timer-label">Time Left</div>
-            <div class="timer-digits" id="timer">00:00</div>
-        </div>
-        <button onclick="startTimer()" style="text-align: center; margin-top: 20px;">Start</button>
+
+<div class="container">
+  <h1>🚀 Vinyoso Launch</h1>
+  <div class="date">22. August 2026</div>
+
+  <div class="countdown">
+    <div class="box">
+      <div id="days" class="number">0</div>
+      <div class="label">Tage</div>
     </div>
+    <div class="box">
+      <div id="hours" class="number">0</div>
+      <div class="label">Stunden</div>
+    </div>
+    <div class="box">
+      <div id="minutes" class="number">0</div>
+      <div class="label">Minuten</div>
+    </div>
+    <div class="box">
+      <div id="seconds" class="number">0</div>
+      <div class="label">Sekunden</div>
+    </div>
+  </div>
+</div>
 
-    <script>
-        let timer;
-        
-        function startTimer() {
-            if (!timer) {
-                setInterval updateTimer, 1000);
-                timer = setInterval(updateTimer, 1000);
-            }
-        }
+<script>
+  const targetDate = new Date("2026-08-22T00:00:00").getTime();
 
-        function stopTimer() {
-            clearInterval(timer);
-            resetTimer();
-        }
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
 
-        function resetTimer() {
-            clearInterval(timer);
-            document.getElementById('timer').textContent = '00:00';
-        }
+    if (diff <= 0) {
+      document.querySelector(".countdown").innerHTML = "<h2>🎉 Es ist soweit!</h2>";
+      return;
+    }
 
-        function updateTimer() {
-            let minutes = Math.floor(totalTime / 60).toString().padStart(2, '0');
-            let seconds = (totalTime % 60).toString().padStart(2, '0');
-            document.getElementById('timer').textContent = `${minutes}:${seconds}`;
-        }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
 
-        // Set initial total time to 10 minutes
-        const totalTime = 10 * 60 * 1000;
-        resetTimer();
-    </script>
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
 </body>
 </html>
