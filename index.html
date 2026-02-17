@@ -1,10 +1,138 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Mein Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Apple Timer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .timer-face {
+            width: 400px;
+            height: 60px;
+            border: 2px solid #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            padding: 10px;
+        }
+
+        .timer-label {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            padding: 8px 16px;
+        }
+
+        .timer-digits {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: -10px;
+        }
+
+        .digit {
+            font-size: 4rem;
+            width: 50px;
+            height: 70px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            background-color: #fff;
+            border: none;
+            border-radius: 20px;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .timer-digits~.digit,
+        .timer-label {
+            animation: pulse 2s infinite;
+        }
+    </style>
 </head>
 <body>
-  <h1>🚀 Es funktioniert!</h1>
-  <p>Meine Website ist online.</p>
+    <div class="container">
+        <h1>Chrono Timer</h1>
+        <div class="timer-face">
+            <div class="timer-label">Time Left</div>
+            <div class="timer-digits" id="timer">00:00</div>
+        </div>
+        <button onclick="startTimer()" style="text-align: center; margin-top: 20px;">Start</button>
+    </div>
+
+    <script>
+        let timer;
+        
+        function startTimer() {
+            if (!timer) {
+                setInterval updateTimer, 1000);
+                timer = setInterval(updateTimer, 1000);
+            }
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+            resetTimer();
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            document.getElementById('timer').textContent = '00:00';
+        }
+
+        function updateTimer() {
+            let minutes = Math.floor(totalTime / 60).toString().padStart(2, '0');
+            let seconds = (totalTime % 60).toString().padStart(2, '0');
+            document.getElementById('timer').textContent = `${minutes}:${seconds}`;
+        }
+
+        // Set initial total time to 10 minutes
+        const totalTime = 10 * 60 * 1000;
+        resetTimer();
+    </script>
 </body>
 </html>
