@@ -1,112 +1,508 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Vinyls0ul Countdown</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nigeria: Culture & Heritage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      max-width: 800px;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000;
+            color: #fff;
+        }
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
+        .poster-container {
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .date {
-      opacity: 0.7;
-      margin-bottom: 40px;
-    }
+        /* Animated background pattern */
+        .bg-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
 
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
+        .accent-shape {
+            position: absolute;
+            opacity: 0.08;
+        }
 
-    .box {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px 30px;
-      border-radius: 12px;
-      min-width: 100px;
-    }
+        .shape-1 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #008753, #19a34a);
+            border-radius: 0% 100% 0% 100%;
+            top: -150px;
+            right: -150px;
+            animation: morphing1 15s ease-in-out infinite;
+        }
 
-    .number {
-      font-size: 36px;
-      font-weight: bold;
-    }
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, #fcd34d, #f59e0b);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            bottom: -100px;
+            left: -100px;
+            animation: morphing2 20s ease-in-out infinite reverse;
+        }
 
-    .label {
-      font-size: 14px;
-      opacity: 0.7;
-    }
-  </style>
+        @keyframes morphing1 {
+            0%, 100% {
+                border-radius: 0% 100% 0% 100%;
+                transform: rotate(0deg);
+            }
+            50% {
+                border-radius: 100% 0% 100% 0%;
+                transform: rotate(180deg);
+            }
+        }
+
+        @keyframes morphing2 {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(45deg);
+            }
+        }
+
+        /* Main content */
+        .content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: slideDown 1s ease-out;
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(48px, 12vw, 120px);
+            font-weight: 900;
+            background: linear-gradient(135deg, #19a34a, #fcd34d, #008753);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(18px, 4vw, 32px);
+            color: #fcd34d;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #008753, #19a34a, #fcd34d);
+            margin: 30px auto;
+            border-radius: 2px;
+        }
+
+        /* Main info section */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(25, 163, 74, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #19a34a;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Culture grid */
+        .culture-section {
+            margin-bottom: 80px;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 8vw, 64px);
+            color: #19a34a;
+            margin-bottom: 50px;
+            text-align: center;
+            font-weight: 900;
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .culture-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(0, 135, 83, 0.2), rgba(25, 163, 74, 0.2));
+            border: 1px solid rgba(25, 163, 74, 0.3);
+            padding: 30px;
+            transition: all 0.4s ease;
+        }
+
+        .culture-item:hover {
+            border-color: #fcd34d;
+            background: linear-gradient(135deg, rgba(0, 135, 83, 0.3), rgba(252, 211, 77, 0.1));
+        }
+
+        .culture-item h3 {
+            font-size: 20px;
+            color: #fcd34d;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .culture-item p {
+            font-size: 13px;
+            color: #b0b0b0;
+            line-height: 1.7;
+        }
+
+        /* Achievement highlights */
+        .achievements {
+            background: linear-gradient(135deg, rgba(0, 135, 83, 0.1), rgba(25, 163, 74, 0.1));
+            border: 1px solid rgba(25, 163, 74, 0.3);
+            padding: 50px;
+            border-radius: 10px;
+            margin-bottom: 80px;
+            animation: fadeIn 1s ease-out 0.7s both;
+        }
+
+        .achievements h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 44px;
+            color: #fcd34d;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 900;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .achievement-item {
+            text-align: center;
+        }
+
+        .achievement-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 36px;
+            color: #19a34a;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .achievement-label {
+            font-size: 13px;
+            color: #e0e0e0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* Quick facts */
+        .facts-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .fact {
+            border-left: 4px solid #fcd34d;
+            padding-left: 20px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .fact-label {
+            font-size: 12px;
+            color: #fcd34d;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .fact-value {
+            font-size: 16px;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            font-size: 12px;
+            letter-spacing: 2px;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        .flag-emoji {
+            font-size: 40px;
+            margin: 0 10px;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .poster-container {
+                padding: 30px 20px;
+            }
+
+            .achievements {
+                padding: 30px;
+            }
+
+            .info-card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<div class="container">
-  <h1>💕We see each other again in💕:</h1>
-  <div class="date">27. März 2026</div>
-
-  <div class="countdown">
-    <div class="box">
-      <div id="days" class="number">0</div>
-      <div class="label">Tage</div>
+    <div class="bg-decoration">
+        <div class="accent-shape shape-1"></div>
+        <div class="accent-shape shape-2"></div>
     </div>
-    <div class="box">
-      <div id="hours" class="number">0</div>
-      <div class="label">Stunden</div>
+
+    <div class="poster-container">
+        <div class="content">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="main-title">NIGERIA</h1>
+                <p class="subtitle">Culture • History • Innovation</p>
+                <div class="divider"></div>
+            </div>
+
+            <!-- Quick Overview -->
+            <div class="info-section">
+                <div class="info-card">
+                    <span class="card-icon">🌍</span>
+                    <h3 class="card-title">The Giant</h3>
+                    <p class="card-text">Most populous nation in Africa with over 230 million people representing more than 250 ethnic groups united by diversity and resilience.</p>
+                </div>
+                <div class="info-card">
+                    <span class="card-icon">🎬</span>
+                    <h3 class="card-title">Nollywood</h3>
+                    <p class="card-text">World's second-largest film industry producing over 2,000 movies annually. Nigeria's creative influence reaches globally.</p>
+                </div>
+                <div class="info-card">
+                    <span class="card-icon">🎵</span>
+                    <h3 class="card-title">Music Legacy</h3>
+                    <p class="card-text">Home to Afrobeats, a global phenomenon. Artists like Burna Boy, Wizkid, and Tiësto collaborators shape world music.</p>
+                </div>
+            </div>
+
+            <!-- Key Facts -->
+            <div class="facts-section">
+                <div class="fact">
+                    <div class="fact-label">🏙️ Major Cities</div>
+                    <div class="fact-value">Lagos, Abuja, Kano, Port Harcourt, Ibadan</div>
+                </div>
+                <div class="fact">
+                    <div class="fact-label">🗣️ Languages</div>
+                    <div class="fact-value">English (official) + 500+ indigenous languages including Yoruba, Igbo, Hausa</div>
+                </div>
+                <div class="fact">
+                    <div class="fact-label">⚡ Energy</div>
+                    <div class="fact-value">Africa's largest oil producer & leading solar energy investor</div>
+                </div>
+                <div class="fact">
+                    <div class="fact-label">📱 Tech Hub</div>
+                    <div class="fact-value">Africa's leading fintech ecosystem; home to startups like Flutterwave & Paystack</div>
+                </div>
+            </div>
+
+            <!-- Culture Section -->
+            <div class="culture-section">
+                <h2 class="section-title">Rich Cultural Heritage</h2>
+                <div class="culture-grid">
+                    <div class="culture-item">
+                        <h3>🎨 Traditional Arts</h3>
+                        <p>Ancient Benin bronzes, intricate beadwork, Adire textiles, and wood carvings showcase centuries of artistic mastery and cultural expression.</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3>🥁 Music & Dance</h3>
+                        <p>Afrobeats, Highlife, Juju, and traditional drumming create a vibrant soundscape. Gumbe, Adowa, and Shoki dances express joy and celebration.</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3>🍲 Cuisine</h3>
+                        <p>Jollof rice, pepper soups, pounded yam, egusi, and suya reflect diverse regional flavors and agricultural traditions across Nigeria.</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3>📚 Literature</h3>
+                        <p>Home to Africa's most celebrated authors: Chinua Achebe, Wole Soyinka (Nobel Prize), Amos Tutuola, and contemporary voices.</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3>🎭 Traditional Religion</h3>
+                        <p>Yoruba Orisha traditions, Igbo spirituality, and Hausa practices preserve ancestral wisdom and cultural continuity across generations.</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3>👗 Fashion</h3>
+                        <p>Ankara, adire, and traditional textiles inspire global trends. Nigerian designers lead African fashion on the world stage.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="achievements">
+                <h2>Global Impact & Achievements</h2>
+                <div class="achievement-grid">
+                    <div class="achievement-item">
+                        <div class="achievement-number">230M+</div>
+                        <div class="achievement-label">Population</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-number">1</div>
+                        <div class="achievement-label">Nobel Prize (Lit)</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-number">$2000+</div>
+                        <div class="achievement-label">Fintech Value (B)</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-number">500+</div>
+                        <div class="achievement-label">Languages</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-number">2000+</div>
+                        <div class="achievement-label">Films/Year</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-number">#1</div>
+                        <div class="achievement-label">African Music</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notable Figures -->
+            <div class="culture-section">
+                <h2 class="section-title">Icons & Legends</h2>
+                <div class="culture-grid">
+                    <div class="culture-item">
+                        <h3>📖 Chinua Achebe</h3>
+                        <p>Author of "Things Fall Apart," revolutionized African literature and challenged Western narratives about Africa.</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3>🎭 Wole Soyinka</h3>
+                        <p>First African Nobel Prize winner in Literature (1986). Playwright, poet, and human rights activist.</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3>🎵 Fela Kuti</h3>
+                        <p>Creator of Afrobeat music. Revolutionary artist and political activist who influenced generations worldwide.</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3>⚽ Pelé & Maradona's Era</h3>
+                        <p>Nigerian Super Eagles won Africa Cup of Nations three times, showcasing excellence in sports and national pride.</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3>👩‍🔬 Space Pioneer</h3>
+                        <p>Contributions to STEM fields; growing ecosystem of engineers, scientists, and innovators changing Africa's future.</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3>🎬 Modern Creators</h3>
+                        <p>Burna Boy, Wizkid, Tiwa Savage, Rema bring Afrobeats to global stages. Directors elevate Nigerian storytelling.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span class="flag-emoji">🇳🇬</span>
+                CELEBRATING DIVERSITY, CULTURE, AND THE SPIRIT OF AFRICA
+                <span class="flag-emoji">🇳🇬</span>
+            </div>
+        </div>
     </div>
-    <div class="box">
-      <div id="minutes" class="number">0</div>
-      <div class="label">Minuten</div>
-    </div>
-    <div class="box">
-      <div id="seconds" class="number">0</div>
-      <div class="label">Sekunden</div>
-    </div>
-  </div>
-</div>
-
-<script>
-  const targetDate = new Date("2026-03-27T16:00:00").getTime();
-
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const diff = targetDate - now;
-
-    if (diff <= 0) {
-      document.querySelector(".countdown").innerHTML = "<h2>🎉 Es ist soweit!</h2>";
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
-  }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-</script>
-
 </body>
 </html>
