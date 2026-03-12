@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nigeria: Culture & Heritage</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>🇳🇬 NIGERIA - The Dynamic Poster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;700&family=Space+Mono:wght@400;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,23 +12,19 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background: #000;
             color: #fff;
+            overflow-x: hidden;
         }
 
-        .poster-container {
-            width: 100%;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
-            padding: 60px 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Animated background pattern */
-        .bg-decoration {
+        /* ===== ANIMATED BACKGROUND ===== */
+        .floating-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -36,249 +32,533 @@
             height: 100%;
             z-index: 1;
             pointer-events: none;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 135, 83, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(252, 211, 77, 0.1) 0%, transparent 50%);
         }
 
-        .accent-shape {
+        .float-particle {
             position: absolute;
-            opacity: 0.08;
+            border-radius: 50%;
+            animation: floatAround 20s infinite ease-in-out;
         }
 
-        .shape-1 {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, #008753, #19a34a);
-            border-radius: 0% 100% 0% 100%;
-            top: -150px;
-            right: -150px;
-            animation: morphing1 15s ease-in-out infinite;
+        .particle-1 { width: 80px; height: 80px; background: radial-gradient(circle, #19a34a, transparent); top: 10%; left: 10%; animation-delay: 0s; }
+        .particle-2 { width: 120px; height: 120px; background: radial-gradient(circle, #fcd34d, transparent); top: 30%; right: 15%; animation-delay: 2s; }
+        .particle-3 { width: 100px; height: 100px; background: radial-gradient(circle, #008753, transparent); bottom: 20%; left: 20%; animation-delay: 4s; }
+        .particle-4 { width: 90px; height: 90px; background: radial-gradient(circle, #fcd34d, transparent); top: 50%; right: 5%; animation-delay: 6s; }
+        .particle-5 { width: 110px; height: 110px; background: radial-gradient(circle, #19a34a, transparent); bottom: 10%; right: 10%; animation-delay: 8s; }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.3; }
+            25% { transform: translate(100px, -100px) scale(1.2) rotate(90deg); opacity: 0.6; }
+            50% { transform: translate(50px, 100px) scale(0.8) rotate(180deg); opacity: 0.4; }
+            75% { transform: translate(-100px, 50px) scale(1.1) rotate(270deg); opacity: 0.5; }
         }
 
-        .shape-2 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(45deg, #fcd34d, #f59e0b);
-            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-            bottom: -100px;
-            left: -100px;
-            animation: morphing2 20s ease-in-out infinite reverse;
-        }
-
-        @keyframes morphing1 {
-            0%, 100% {
-                border-radius: 0% 100% 0% 100%;
-                transform: rotate(0deg);
-            }
-            50% {
-                border-radius: 100% 0% 100% 0%;
-                transform: rotate(180deg);
-            }
-        }
-
-        @keyframes morphing2 {
-            0%, 100% {
-                transform: scale(1) rotate(0deg);
-            }
-            50% {
-                transform: scale(1.1) rotate(45deg);
-            }
-        }
-
-        /* Main content */
-        .content {
+        /* ===== MAIN CONTAINER ===== */
+        .poster-container {
             position: relative;
             z-index: 10;
-            max-width: 1200px;
-            margin: 0 auto;
+            min-height: 100vh;
         }
 
-        .header {
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 120vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, #1a0000 0%, #0a0a2e 50%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 135, 83, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(252, 211, 77, 0.2) 0%, transparent 50%);
+            animation: bgShift 20s ease-in-out infinite;
+            top: -50%;
+            left: -50%;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, 20px) scale(1.05); }
+        }
+
+        .hero-content {
             text-align: center;
-            margin-bottom: 80px;
-            animation: slideDown 1s ease-out;
+            z-index: 5;
+            position: relative;
         }
 
-        .main-title {
+        .hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(48px, 12vw, 120px);
+            font-size: clamp(60px, 20vw, 200px);
             font-weight: 900;
-            background: linear-gradient(135deg, #19a34a, #fcd34d, #008753);
+            background: linear-gradient(135deg, #008753, #19a34a, #fcd34d, #19a34a, #008753);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
+            animation: 
+                slideInDown 1.2s ease-out,
+                gradientFlow 8s ease infinite,
+                textGlow 2s ease-in-out infinite;
             line-height: 1;
+            text-shadow: 0 0 60px rgba(25, 163, 74, 0.5);
         }
 
-        .subtitle {
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-100px) scaleY(0.5); }
+            to { opacity: 1; transform: translateY(0) scaleY(1); }
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes textGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(25, 163, 74, 0.5)); }
+            50% { filter: drop-shadow(0 0 30px rgba(252, 211, 77, 0.8)); }
+        }
+
+        .hero-subtitle {
             font-family: 'Space Mono', monospace;
-            font-size: clamp(18px, 4vw, 32px);
+            font-size: clamp(18px, 5vw, 42px);
             color: #fcd34d;
-            letter-spacing: 4px;
+            margin-top: 20px;
+            letter-spacing: 6px;
             text-transform: uppercase;
+            animation: slideInUp 1.2s ease-out 0.2s both, letterSpacePulse 2s ease-in-out 1s infinite;
             font-weight: 700;
         }
 
-        .divider {
-            width: 80px;
-            height: 3px;
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(100px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes letterSpacePulse {
+            0%, 100% { letter-spacing: 6px; }
+            50% { letter-spacing: 10px; }
+        }
+
+        .hero-divider {
+            width: 100px;
+            height: 5px;
             background: linear-gradient(90deg, #008753, #19a34a, #fcd34d);
-            margin: 30px auto;
-            border-radius: 2px;
-        }
-
-        /* Main info section */
-        .info-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-bottom: 80px;
-            animation: fadeIn 1s ease-out 0.3s both;
-        }
-
-        .info-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
+            margin: 40px auto;
             border-radius: 10px;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            animation: expandWidth 1.2s ease-out 0.4s both;
         }
 
-        .info-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(25, 163, 74, 0.5);
-            transform: translateY(-5px);
+        @keyframes expandWidth {
+            from { width: 0; opacity: 0; }
+            to { width: 100px; opacity: 1; }
         }
 
-        .card-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: #19a34a;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .card-text {
-            font-size: 14px;
+        .hero-description {
+            font-size: clamp(16px, 3vw, 24px);
             color: #e0e0e0;
-            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            animation: fadeInScale 1.2s ease-out 0.6s both;
+            line-height: 1.8;
         }
 
-        /* Culture grid */
-        .culture-section {
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .emoji-parade {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .emoji-bounce {
+            font-size: 60px;
+            animation: 
+                bounce 2s ease-in-out infinite,
+                rotate360 3s linear infinite,
+                pulse 1.5s ease-in-out infinite;
+        }
+
+        .emoji-bounce:nth-child(1) { animation-delay: 0s, 0s, 0s; }
+        .emoji-bounce:nth-child(2) { animation-delay: 0.2s, 1s, 0.5s; }
+        .emoji-bounce:nth-child(3) { animation-delay: 0.4s, 2s, 1s; }
+        .emoji-bounce:nth-child(4) { animation-delay: 0.6s, 0.5s, 1.5s; }
+        .emoji-bounce:nth-child(5) { animation-delay: 0.8s, 1.5s, 0.2s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scaleY(1); }
+            50% { transform: translateY(-50px) scaleY(1.1); }
+        }
+
+        @keyframes rotate360 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { filter: brightness(1) drop-shadow(0 0 10px transparent); }
+            50% { filter: brightness(1.3) drop-shadow(0 0 20px rgba(252, 211, 77, 0.8)); }
+        }
+
+        /* ===== STATS SECTION ===== */
+        .stats-section {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding: 80px 40px;
+            background: linear-gradient(180deg, #16213e 0%, #0f3460 100%);
+            align-items: center;
+            justify-items: center;
+        }
+
+        .stat-card {
+            background: rgba(25, 163, 74, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid #19a34a;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            min-width: 280px;
+            animation: 
+                zoomIn 1s ease-out,
+                float-up 3s ease-in-out infinite,
+                borderGlow 2s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .stat-card:hover {
+            transform: scale(1.1) rotate(5deg);
+            border-color: #fcd34d;
+            box-shadow: 0 0 40px rgba(252, 211, 77, 0.6);
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.5) rotate(-30deg); }
+            to { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        @keyframes float-up {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(3deg); }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { border-color: #19a34a; box-shadow: 0 0 10px rgba(25, 163, 74, 0.3); }
+            50% { border-color: #fcd34d; box-shadow: 0 0 30px rgba(252, 211, 77, 0.6); }
+        }
+
+        .stat-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .stat-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: #fcd34d;
+            margin-bottom: 10px;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        /* ===== CULTURE CARDS ===== */
+        .culture-showcase {
+            min-height: 100vh;
+            padding: 80px 40px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .section-header {
+            text-align: center;
             margin-bottom: 80px;
-            animation: fadeIn 1s ease-out 0.5s both;
+            animation: slideInDown 1s ease-out;
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(36px, 8vw, 64px);
-            color: #19a34a;
-            margin-bottom: 50px;
-            text-align: center;
+            font-size: clamp(48px, 12vw, 80px);
+            background: linear-gradient(135deg, #19a34a, #fcd34d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: 900;
+            margin-bottom: 20px;
+            animation: 
+                slideInDown 1s ease-out,
+                textShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes textShimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
         }
 
         .culture-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .culture-item {
+        .culture-card {
+            background: linear-gradient(135deg, rgba(0, 135, 83, 0.2), rgba(25, 163, 74, 0.2));
+            border: 2px solid rgba(25, 163, 74, 0.4);
+            padding: 40px;
+            border-radius: 20px;
+            animation: 
+                slideInLeft 1s ease-out,
+                wiggle 4s ease-in-out infinite,
+                shadowPulse 2s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
-            background: linear-gradient(135deg, rgba(0, 135, 83, 0.2), rgba(25, 163, 74, 0.2));
-            border: 1px solid rgba(25, 163, 74, 0.3);
+        }
+
+        .culture-card:nth-child(odd) {
+            animation: 
+                slideInRight 1s ease-out,
+                wiggle 4s ease-in-out infinite 0.2s,
+                shadowPulse 2s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-100px) rotateY(20deg); }
+            to { opacity: 1; transform: translateX(0) rotateY(0deg); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px) rotateY(-20deg); }
+            to { opacity: 1; transform: translateX(0) rotateY(0deg); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: skewX(0deg); }
+            25% { transform: skewX(2deg); }
+            75% { transform: skewX(-2deg); }
+        }
+
+        @keyframes shadowPulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(25, 163, 74, 0.2); }
+            50% { box-shadow: 0 20px 50px rgba(252, 211, 77, 0.4); }
+        }
+
+        .culture-card:hover {
+            transform: scale(1.08) rotateZ(5deg);
+            border-color: #fcd34d;
+            background: linear-gradient(135deg, rgba(0, 135, 83, 0.4), rgba(252, 211, 77, 0.2));
+        }
+
+        .culture-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: 
+                bounce 2s ease-in-out infinite,
+                colorShift 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(252, 211, 77, 0.5));
+        }
+
+        @keyframes colorShift {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(252, 211, 77, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(25, 163, 74, 0.8)); }
+        }
+
+        .culture-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 28px;
+            color: #fcd34d;
+            margin-bottom: 15px;
+            animation: slideInDown 1s ease-out 0.3s both;
+            font-weight: 700;
+        }
+
+        .culture-text {
+            font-size: 15px;
+            color: #b0b0b0;
+            line-height: 1.8;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        /* ===== ARTISTS SECTION ===== */
+        .artists-section {
+            min-height: 100vh;
+            padding: 80px 40px;
+            background: linear-gradient(180deg, #0f3460 0%, #1a1a2e 100%);
+        }
+
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .artist-card {
+            background: rgba(252, 211, 77, 0.1);
+            border: 2px solid #fcd34d;
             padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            animation: 
+                popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+                float-up 3s ease-in-out infinite,
+                artistGlow 2s ease-in-out infinite;
             transition: all 0.4s ease;
         }
 
-        .culture-item:hover {
-            border-color: #fcd34d;
-            background: linear-gradient(135deg, rgba(0, 135, 83, 0.3), rgba(252, 211, 77, 0.1));
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0) rotate(-180deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
         }
 
-        .culture-item h3 {
-            font-size: 20px;
-            color: #fcd34d;
-            margin-bottom: 12px;
-            font-weight: 700;
+        @keyframes artistGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(252, 211, 77, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(252, 211, 77, 0.6); }
         }
 
-        .culture-item p {
-            font-size: 13px;
-            color: #b0b0b0;
-            line-height: 1.7;
+        .artist-card:hover {
+            transform: scale(1.1) rotate(-5deg);
+            background: rgba(252, 211, 77, 0.2);
+            border-color: #19a34a;
         }
 
-        /* Achievement highlights */
-        .achievements {
-            background: linear-gradient(135deg, rgba(0, 135, 83, 0.1), rgba(25, 163, 74, 0.1));
-            border: 1px solid rgba(25, 163, 74, 0.3);
-            padding: 50px;
-            border-radius: 10px;
-            margin-bottom: 80px;
-            animation: fadeIn 1s ease-out 0.7s both;
+        .artist-emoji {
+            font-size: 80px;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: 
+                bounce 2s ease-in-out infinite,
+                rotate360 4s linear infinite;
         }
 
-        .achievements h2 {
+        .artist-name {
             font-family: 'Playfair Display', serif;
-            font-size: 44px;
+            font-size: 24px;
             color: #fcd34d;
-            margin-bottom: 40px;
-            text-align: center;
-            font-weight: 900;
-        }
-
-        .achievement-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-
-        .achievement-item {
-            text-align: center;
-        }
-
-        .achievement-number {
-            font-family: 'Space Mono', monospace;
-            font-size: 36px;
-            color: #19a34a;
+            margin-bottom: 10px;
             font-weight: 700;
+        }
+
+        .artist-role {
+            font-size: 13px;
+            color: #19a34a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             margin-bottom: 10px;
         }
 
-        .achievement-label {
+        .artist-bio {
             font-size: 13px;
-            color: #e0e0e0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
+            color: #d0d0d0;
+            line-height: 1.6;
         }
 
-        /* Quick facts */
+        /* ===== FACTS SECTION ===== */
         .facts-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-            animation: fadeIn 1s ease-out 0.6s both;
+            min-height: 100vh;
+            padding: 80px 40px;
+            background: linear-gradient(135deg, #1a0000 0%, #2d0000 50%, #0f0f1e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .fact {
-            border-left: 4px solid #fcd34d;
-            padding-left: 20px;
-            padding-top: 15px;
-            padding-bottom: 15px;
+        .facts-wrapper {
+            max-width: 1200px;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .fact-box {
+            background: rgba(25, 163, 74, 0.1);
+            border-left: 5px solid #fcd34d;
+            padding: 30px;
+            border-radius: 10px;
+            animation: 
+                slideInLeft 1s ease-out,
+                slideUp 2s ease-in-out infinite;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes slideUp {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .fact-box:nth-child(even) {
+            border-left-color: #19a34a;
+            animation: slideInRight 1s ease-out, slideUp 2s ease-in-out 0.5s infinite;
+        }
+
+        .fact-box:hover {
+            background: rgba(25, 163, 74, 0.3);
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 10px 40px rgba(25, 163, 74, 0.4);
         }
 
         .fact-label {
@@ -286,223 +566,396 @@
             color: #fcd34d;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 700;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
         }
 
         .fact-value {
-            font-size: 16px;
+            font-size: 18px;
             color: #fff;
-            line-height: 1.5;
+            line-height: 1.6;
+            font-weight: 600;
         }
 
-        /* Footer */
+        /* ===== FOOTER ===== */
         .footer {
+            min-height: 100vh;
+            padding: 80px 40px;
+            background: linear-gradient(180deg, #000 0%, #1a0000 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #888;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 15vw, 100px);
+            font-weight: 900;
+            background: linear-gradient(135deg, #008753, #19a34a, #fcd34d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: 
+                slideInDown 1s ease-out,
+                gradientFlow 8s ease infinite,
+                textGlow 2s ease-in-out infinite;
+            margin-bottom: 30px;
+        }
+
+        .footer-text {
+            font-size: 18px;
+            color: #d0d0d0;
+            max-width: 800px;
+            line-height: 1.8;
+            animation: fadeIn 1s ease-out 0.3s both;
+            margin-bottom: 40px;
+        }
+
+        .flag-emojis {
+            font-size: 80px;
+            animation: 
+                bounce 2s ease-in-out infinite,
+                rotate360 3s linear infinite;
+            margin: 40px 0;
+        }
+
+        .footer-credit {
             font-size: 12px;
+            color: #666;
             letter-spacing: 2px;
-            animation: fadeIn 1s ease-out 0.8s both;
+            text-transform: uppercase;
+            animation: fadeIn 1s ease-out 0.6s both;
         }
 
-        .flag-emoji {
-            font-size: 40px;
-            margin: 0 10px;
-        }
-
-        /* Animations */
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* ===== SCROLL ANIMATIONS ===== */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero, .stats-section, .culture-showcase, .artists-section, .facts-section, .footer {
+                padding: 40px 20px;
             }
-            to {
-                opacity: 1;
+
+            .emoji-parade {
+                gap: 15px;
+            }
+
+            .emoji-bounce {
+                font-size: 40px;
+            }
+
+            .culture-grid, .artists-grid, .facts-grid {
+                gap: 25px;
             }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .poster-container {
-                padding: 30px 20px;
-            }
+        /* ===== CUSTOM SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
 
-            .achievements {
-                padding: 30px;
-            }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
 
-            .info-card {
-                padding: 20px;
-            }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #008753, #19a34a, #fcd34d);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #19a34a, #fcd34d, #008753);
         }
     </style>
 </head>
 <body>
-    <div class="bg-decoration">
-        <div class="accent-shape shape-1"></div>
-        <div class="accent-shape shape-2"></div>
+    <!-- FLOATING PARTICLES -->
+    <div class="floating-bg">
+        <div class="float-particle particle-1"></div>
+        <div class="float-particle particle-2"></div>
+        <div class="float-particle particle-3"></div>
+        <div class="float-particle particle-4"></div>
+        <div class="float-particle particle-5"></div>
     </div>
 
+    <!-- MAIN POSTER -->
     <div class="poster-container">
-        <div class="content">
-            <!-- Header -->
-            <div class="header">
-                <h1 class="main-title">NIGERIA</h1>
-                <p class="subtitle">Culture • History • Innovation</p>
-                <div class="divider"></div>
+        
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">🇳🇬 NIGERIA</h1>
+                <p class="hero-subtitle">The Giant of Africa</p>
+                <div class="hero-divider"></div>
+                <p class="hero-description">
+                    A nation of extraordinary diversity, creative genius, and indomitable spirit.
+                    From ancient kingdoms to global innovation, Nigeria writes the future.
+                </p>
+                <div class="emoji-parade">
+                    <span class="emoji-bounce">🎬</span>
+                    <span class="emoji-bounce">🎵</span>
+                    <span class="emoji-bounce">🌍</span>
+                    <span class="emoji-bounce">💎</span>
+                    <span class="emoji-bounce">✨</span>
+                </div>
             </div>
+        </section>
 
-            <!-- Quick Overview -->
-            <div class="info-section">
-                <div class="info-card">
-                    <span class="card-icon">🌍</span>
-                    <h3 class="card-title">The Giant</h3>
-                    <p class="card-text">Most populous nation in Africa with over 230 million people representing more than 250 ethnic groups united by diversity and resilience.</p>
-                </div>
-                <div class="info-card">
-                    <span class="card-icon">🎬</span>
-                    <h3 class="card-title">Nollywood</h3>
-                    <p class="card-text">World's second-largest film industry producing over 2,000 movies annually. Nigeria's creative influence reaches globally.</p>
-                </div>
-                <div class="info-card">
-                    <span class="card-icon">🎵</span>
-                    <h3 class="card-title">Music Legacy</h3>
-                    <p class="card-text">Home to Afrobeats, a global phenomenon. Artists like Burna Boy, Wizkid, and Tiësto collaborators shape world music.</p>
-                </div>
+        <!-- ===== STATS SECTION ===== -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number">230M+</div>
+                <div class="stat-label">Population</div>
             </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌍</div>
+                <div class="stat-number">250+</div>
+                <div class="stat-label">Ethnic Groups</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🗣️</div>
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Languages</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎬</div>
+                <div class="stat-number">2000+</div>
+                <div class="stat-label">Films/Year</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📱</div>
+                <div class="stat-number">#1</div>
+                <div class="stat-label">African Fintech</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-number">1</div>
+                <div class="stat-label">Nobel Prize</div>
+            </div>
+        </section>
 
-            <!-- Key Facts -->
-            <div class="facts-section">
-                <div class="fact">
-                    <div class="fact-label">🏙️ Major Cities</div>
-                    <div class="fact-value">Lagos, Abuja, Kano, Port Harcourt, Ibadan</div>
+        <!-- ===== CULTURE SECTION ===== -->
+        <section class="culture-showcase">
+            <div class="section-header">
+                <h2 class="section-title">🎨 Cultural Heritage</h2>
+            </div>
+            <div class="culture-grid">
+                <div class="culture-card">
+                    <div class="culture-icon">🎬</div>
+                    <h3 class="culture-title">Nollywood</h3>
+                    <p class="culture-text">World's 2nd largest film industry. Over 2,000 movies annually bringing Nigerian stories to the globe with unmatched creativity and passion.</p>
                 </div>
-                <div class="fact">
-                    <div class="fact-label">🗣️ Languages</div>
-                    <div class="fact-value">English (official) + 500+ indigenous languages including Yoruba, Igbo, Hausa</div>
+                <div class="culture-card">
+                    <div class="culture-icon">🎵</div>
+                    <h3 class="culture-title">Afrobeats</h3>
+                    <p class="culture-text">A global phenomenon! From Fela Kuti to Burna Boy, Nigerian music dominates the world stage and defines a generation.</p>
                 </div>
-                <div class="fact">
-                    <div class="fact-label">⚡ Energy</div>
-                    <div class="fact-value">Africa's largest oil producer & leading solar energy investor</div>
+                <div class="culture-card">
+                    <div class="culture-icon">🍲</div>
+                    <h3 class="culture-title">Culinary Magic</h3>
+                    <p class="culture-text">Jollof rice debates, pepper soups, suya, and egusi represent centuries of culinary tradition and regional excellence.</p>
                 </div>
-                <div class="fact">
-                    <div class="fact-label">📱 Tech Hub</div>
-                    <div class="fact-value">Africa's leading fintech ecosystem; home to startups like Flutterwave & Paystack</div>
+                <div class="culture-card">
+                    <div class="culture-icon">📚</div>
+                    <h3 class="culture-title">Literature</h3>
+                    <p class="culture-text">Chinua Achebe, Wole Soyinka (Nobel Prize), Amos Tutuola - shaping African literary excellence and global discourse.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon">👗</div>
+                    <h3 class="culture-title">Fashion & Design</h3>
+                    <p class="culture-text">Ankara, Adire, and traditional textiles inspire global runways. Nigerian designers lead African fashion revolution.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon">🎨</div>
+                    <h3 class="culture-title">Ancient Arts</h3>
+                    <p class="culture-text">Benin bronzes, intricate beadwork, wood carvings, and masks showcase millennia of artistic mastery and cultural wisdom.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon">🥁</div>
+                    <h3 class="culture-title">Dance & Drums</h3>
+                    <p class="culture-text">Gumbe, Adowa, Shoki, and traditional rhythms express joy, celebrate life, and preserve ancestral knowledge through movement.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon">⚡</div>
+                    <h3 class="culture-title">Spirituality</h3>
+                    <p class="culture-text">Yoruba Orisha traditions, Igbo spirituality, and Hausa practices weave together a rich tapestry of belief and wisdom.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon">💡</div>
+                    <h3 class="culture-title">Innovation</h3>
+                    <p class="culture-text">Fintech leaders Flutterwave & Paystack, mobile-first solutions, and tech talent driving Africa's digital future.</p>
                 </div>
             </div>
+        </section>
 
-            <!-- Culture Section -->
-            <div class="culture-section">
-                <h2 class="section-title">Rich Cultural Heritage</h2>
-                <div class="culture-grid">
-                    <div class="culture-item">
-                        <h3>🎨 Traditional Arts</h3>
-                        <p>Ancient Benin bronzes, intricate beadwork, Adire textiles, and wood carvings showcase centuries of artistic mastery and cultural expression.</p>
+        <!-- ===== LEGENDARY ARTISTS SECTION ===== -->
+        <section class="artists-section">
+            <div class="section-header">
+                <h2 class="section-title">⭐ Global Icons & Legends</h2>
+            </div>
+            <div class="artists-grid">
+                <div class="artist-card">
+                    <div class="artist-emoji">📖</div>
+                    <h3 class="artist-name">Chinua Achebe</h3>
+                    <p class="artist-role">Literary Giant</p>
+                    <p class="artist-bio">"Things Fall Apart" revolutionized African literature and challenged Western narratives globally.</p>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-emoji">🎭</div>
+                    <h3 class="artist-name">Wole Soyinka</h3>
+                    <p class="artist-role">Nobel Laureate 1986</p>
+                    <p class="artist-bio">First African to win Nobel Prize in Literature. Playwright, poet, and human rights champion.</p>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-emoji">🎶</div>
+                    <h3 class="artist-name">Fela Kuti</h3>
+                    <p class="artist-role">Afrobeat Pioneer</p>
+                    <p class="artist-bio">Creator of Afrobeat. Revolutionary musician, activist, and cultural icon who changed world music.</p>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-emoji">🎵</div>
+                    <h3 class="artist-name">Burna Boy</h3>
+                    <p class="artist-role">Afrobeats Legend</p>
+                    <p class="artist-bio">Grammy winner bringing Nigerian sounds to global stages. Ambassador of African excellence.</p>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-emoji">🌟</div>
+                    <h3 class="artist-name">Wizkid</h3>
+                    <p class="artist-role">Global Sensation</p>
+                    <p class="artist-bio">International collaborator. "Essence," "Starboy" defining a generation of Afrobeats.</p>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-emoji">🎬</div>
+                    <h3 class="artist-name">Genevieve Nnaji</h3>
+                    <p class="artist-role">Cinema Icon</p>
+                    <p class="artist-bio">Nollywood legend and filmmaker. "Lionheart" bringing African stories to Netflix globally.</p>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-emoji">💃</div>
+                    <h3 class="artist-name">Tiwa Savage</h3>
+                    <p class="artist-role">Music Powerhouse</p>
+                    <p class="artist-bio">Fearless artist breaking boundaries. Queen of Afrobeats redefining female artistry.</p>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-emoji">🚀</div>
+                    <h3 class="artist-name">Rema</h3>
+                    <p class="artist-role">New Generation</p>
+                    <p class="artist-bio">"Essence," "Calm Down" - defining Gen Z Afrobeats with viral global hits.</p>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-emoji">🎯</div>
+                    <h3 class="artist-name">Dangote</h3>
+                    <p class="artist-role">Business Titan</p>
+                    <p class="artist-bio">Africa's richest billionaire. Industrial visionary building Nigeria's economic future.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FACTS SECTION ===== -->
+        <section class="facts-section">
+            <div class="facts-wrapper">
+                <div class="section-header">
+                    <h2 class="section-title">📊 Incredible Facts</h2>
+                </div>
+                <div class="facts-grid">
+                    <div class="fact-box">
+                        <div class="fact-label">🏙️ Urban Giant</div>
+                        <div class="fact-value">Lagos is Africa's largest city with 15M+ people - a vibrant metropolis of dreams and ambition.</div>
                     </div>
-                    <div class="culture-item">
-                        <h3>🥁 Music & Dance</h3>
-                        <p>Afrobeats, Highlife, Juju, and traditional drumming create a vibrant soundscape. Gumbe, Adowa, and Shoki dances express joy and celebration.</p>
+                    <div class="fact-box">
+                        <div class="fact-label">💰 Economic Power</div>
+                        <div class="fact-value">Largest economy in Africa. Oil producer, emerging tech hub, and agricultural powerhouse.</div>
                     </div>
-                    <div class="culture-item">
-                        <h3>🍲 Cuisine</h3>
-                        <p>Jollof rice, pepper soups, pounded yam, egusi, and suya reflect diverse regional flavors and agricultural traditions across Nigeria.</p>
+                    <div class="fact-box">
+                        <div class="fact-label">🌍 Cultural Export</div>
+                        <div class="fact-value">Nigerian creativity dominates global entertainment. Nollywood, music, fashion setting trends worldwide.</div>
                     </div>
-                    <div class="culture-item">
-                        <h3>📚 Literature</h3>
-                        <p>Home to Africa's most celebrated authors: Chinua Achebe, Wole Soyinka (Nobel Prize), Amos Tutuola, and contemporary voices.</p>
+                    <div class="fact-box">
+                        <div class="fact-label">📱 Tech Revolution</div>
+                        <div class="fact-value">Silicon Valley of Africa. Flutterwave, Paystack, and 1000+ startups reshaping financial technology.</div>
                     </div>
-                    <div class="culture-item">
-                        <h3>🎭 Traditional Religion</h3>
-                        <p>Yoruba Orisha traditions, Igbo spirituality, and Hausa practices preserve ancestral wisdom and cultural continuity across generations.</p>
+                    <div class="fact-box">
+                        <div class="fact-label">🎓 Brain Power</div>
+                        <div class="fact-value">Highest number of African professionals in tech, medicine, academia globally. Talent exporting excellence.</div>
                     </div>
-                    <div class="culture-item">
-                        <h3>👗 Fashion</h3>
-                        <p>Ankara, adire, and traditional textiles inspire global trends. Nigerian designers lead African fashion on the world stage.</p>
+                    <div class="fact-box">
+                        <div class="fact-label">🌾 Agricultural Heritage</div>
+                        <div class="fact-value">Feeds West Africa. Produces cassava, cocoa, palm oil, and seafood at continental scale.</div>
+                    </div>
+                    <div class="fact-box">
+                        <div class="fact-label">🎪 Festive Spirit</div>
+                        <div class="fact-value">Over 100+ major festivals across ethnic groups. Durbar Festival, Osun Osogbo celebrate culture and tradition.</div>
+                    </div>
+                    <div class="fact-box">
+                        <div class="fact-label">⚽ Sports Pride</div>
+                        <div class="fact-value">3x Africa Cup of Nations winners. Football dominates but track & field, boxing producing world champions.</div>
+                    </div>
+                    <div class="fact-box">
+                        <div class="fact-label">🏛️ Ancient Kingdoms</div>
+                        <div class="fact-value">Home to Oyo, Benin, Kanem-Bornu empires. Centuries of sophisticated governance and culture.</div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Achievements -->
-            <div class="achievements">
-                <h2>Global Impact & Achievements</h2>
-                <div class="achievement-grid">
-                    <div class="achievement-item">
-                        <div class="achievement-number">230M+</div>
-                        <div class="achievement-label">Population</div>
-                    </div>
-                    <div class="achievement-item">
-                        <div class="achievement-number">1</div>
-                        <div class="achievement-label">Nobel Prize (Lit)</div>
-                    </div>
-                    <div class="achievement-item">
-                        <div class="achievement-number">$2000+</div>
-                        <div class="achievement-label">Fintech Value (B)</div>
-                    </div>
-                    <div class="achievement-item">
-                        <div class="achievement-number">500+</div>
-                        <div class="achievement-label">Languages</div>
-                    </div>
-                    <div class="achievement-item">
-                        <div class="achievement-number">2000+</div>
-                        <div class="achievement-label">Films/Year</div>
-                    </div>
-                    <div class="achievement-item">
-                        <div class="achievement-number">#1</div>
-                        <div class="achievement-label">African Music</div>
-                    </div>
-                </div>
-            </div>
+        <!-- ===== FOOTER SECTION ===== -->
+        <section class="footer">
+            <h2 class="footer-title">Nigeria's Tomorrow</h2>
+            <p class="footer-text">
+                A nation of boundless potential. Where ancient wisdom meets modern innovation.
+                Where 230 million voices create a symphony of diversity.
+                Where creativity has no limits and dreams become reality.
+            </p>
+            <div class="flag-emojis">🇳🇬</div>
+            <p class="footer-text">
+                From Lagos to Kano, from the Niger Delta to the Jos Plateau,
+                Nigeria is building an African future that inspires the world.
+            </p>
+            <div class="footer-credit">✨ Celebrating Culture, History, and Infinite Possibilities ✨</div>
+        </section>
 
-            <!-- Notable Figures -->
-            <div class="culture-section">
-                <h2 class="section-title">Icons & Legends</h2>
-                <div class="culture-grid">
-                    <div class="culture-item">
-                        <h3>📖 Chinua Achebe</h3>
-                        <p>Author of "Things Fall Apart," revolutionized African literature and challenged Western narratives about Africa.</p>
-                    </div>
-                    <div class="culture-item">
-                        <h3>🎭 Wole Soyinka</h3>
-                        <p>First African Nobel Prize winner in Literature (1986). Playwright, poet, and human rights activist.</p>
-                    </div>
-                    <div class="culture-item">
-                        <h3>🎵 Fela Kuti</h3>
-                        <p>Creator of Afrobeat music. Revolutionary artist and political activist who influenced generations worldwide.</p>
-                    </div>
-                    <div class="culture-item">
-                        <h3>⚽ Pelé & Maradona's Era</h3>
-                        <p>Nigerian Super Eagles won Africa Cup of Nations three times, showcasing excellence in sports and national pride.</p>
-                    </div>
-                    <div class="culture-item">
-                        <h3>👩‍🔬 Space Pioneer</h3>
-                        <p>Contributions to STEM fields; growing ecosystem of engineers, scientists, and innovators changing Africa's future.</p>
-                    </div>
-                    <div class="culture-item">
-                        <h3>🎬 Modern Creators</h3>
-                        <p>Burna Boy, Wizkid, Tiwa Savage, Rema bring Afrobeats to global stages. Directors elevate Nigerian storytelling.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="footer">
-                <span class="flag-emoji">🇳🇬</span>
-                CELEBRATING DIVERSITY, CULTURE, AND THE SPIRIT OF AFRICA
-                <span class="flag-emoji">🇳🇬</span>
-            </div>
-        </div>
     </div>
+
+    <script>
+        // Enhanced scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = entry.target.dataset.animation || 'fadeIn 1s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.culture-card, .stat-card, .artist-card, .fact-box').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.float-particle').forEach((particle, i) => {
+                particle.style.transform = `translate(${scrolled * 0.05 * (i % 2 ? 1 : -1)}px, ${scrolled * 0.1 * (i % 2 ? -1 : 1)}px)`;
+            });
+        });
+    </script>
 </body>
 </html>
