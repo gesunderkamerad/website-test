@@ -8,649 +8,327 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-:root {
-  --red: #E50914;
-  --dark: #141414;
-  --card: #181818;
-  --gray: #808080;
-  --light: #e5e5e5;
-}
-
+:root { --red: #E50914; --dark: #141414; --card: #181818; --gray: #808080; --light: #e5e5e5; }
 * { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  background: var(--dark);
-  color: white;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  overflow-x: hidden;
-}
-
+body { background:var(--dark); color:white; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; overflow-x:hidden; }
 .screen { display:none; width:100%; min-height:100vh; }
 .screen.active { display:flex; }
 
 /* ══ PASSWORD ══ */
-#screen-password {
-  background: #000;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
+#screen-password { background:#000; align-items:center; justify-content:center; position:relative; }
+#screen-password::before { content:''; position:absolute; inset:0; background-image:url('https://assets.nflxext.com/ffe/siteui/vlv3/79fe33d0-9c34-4e09-bba0-c64ded0bf903/9a508ed5-f1f3-4b59-9f5f-6d9f6e29f3d7/DE-en-20231009-popsignuptwoweeks-perspective_alpha_website_medium.jpg'); background-size:cover; background-position:center; opacity:0.5; }
+#screen-password::after { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.5); }
+.pw-logo { position:absolute; top:28px; left:40px; z-index:10; }
+.nf-logo-img { width:148px; display:block; }
+.pw-box { position:relative; z-index:10; background:rgba(0,0,0,0.75); border-radius:4px; padding:60px 68px 80px; width:100%; max-width:450px; }
+.pw-box h1 { font-size:32px; font-weight:700; margin-bottom:28px; }
+.pw-input { width:100%; padding:16px 20px; background:#333; border:1px solid #333; border-radius:4px; color:white; font-size:18px; letter-spacing:6px; text-align:center; outline:none; margin-bottom:16px; height:52px; transition:border-color 0.2s; }
+.pw-input:focus { border-color:#aaa; }
+.pw-input.shake { animation:shake 0.4s ease; border-color:#e87c03; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 20%,60%{transform:translateX(-6px);} 40%,80%{transform:translateX(6px);} }
+.pw-input::placeholder { letter-spacing:1px; color:#8c8c8c; font-size:14px; }
+.pw-btn { width:100%; padding:16px; background:var(--red); color:white; border:none; border-radius:4px; font-size:16px; font-weight:700; cursor:pointer; margin-bottom:12px; transition:background 0.15s; }
+.pw-btn:hover { background:#f40612; }
+.pw-error { color:#e87c03; font-size:13px; margin-top:4px; min-height:16px; }
 
-#screen-password::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('https://assets.nflxext.com/player/html/ffe/cadmium-playercore-6.0057.184.911.js');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.5;
-}
-
-#screen-password::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-}
-
-.pw-logo {
-  position: absolute;
-  top: 28px;
-  left: 40px;
-  z-index: 10;
-}
-
-.pw-box {
-  position: relative;
-  z-index: 10;
-  background: rgba(0,0,0,0.75);
-  border-radius: 4px;
-  padding: 60px 68px 80px;
-  width: 100%;
-  max-width: 450px;
-}
-
-.pw-box h1 { font-size: 32px; font-weight: 700; margin-bottom: 28px; }
-
-.pw-input {
-  width: 100%;
-  padding: 16px 20px;
-  background: #333;
-  border: 1px solid #333;
-  border-radius: 4px;
-  color: white;
-  font-size: 18px;
-  letter-spacing: 6px;
-  text-align: center;
-  outline: none;
-  margin-bottom: 16px;
-  height: 52px;
-  transition: border-color 0.2s;
-}
-
-.pw-input:focus { border-color: #aaa; }
-.pw-input.shake { animation: shake 0.4s ease; border-color: #e87c03; }
-
-@keyframes shake {
-  0%,100% { transform: translateX(0); }
-  20%,60%  { transform: translateX(-6px); }
-  40%,80%  { transform: translateX(6px); }
-}
-
-.pw-input::placeholder { letter-spacing: 1px; color: #8c8c8c; font-size: 14px; }
-
-.pw-btn {
-  width: 100%;
-  padding: 16px;
-  background: var(--red);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.15s;
-  margin-bottom: 12px;
-}
-
-.pw-btn:hover { background: #f40612; }
-
-.pw-error { color: #e87c03; font-size: 13px; margin-top: 4px; min-height: 16px; }
-
-/* ══ INTRO ══ */
+/* ══════════════════════════════════════════════
+   NETFLIX INTRO — Authentic brush/ribbon animation
+   Based on the real Netflix CSS intro technique
+══════════════════════════════════════════════ */
 #screen-intro {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  z-index: 9999;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  position: fixed; inset: 0;
+  background: #000; z-index: 9999;
+  display: none;
+  align-items: center; justify-content: center;
   overflow: hidden;
 }
 
-/* ── Netflix ribbon intro ── */
-.nf-ribbon-stage {
-  position: relative;
-  width: clamp(60px, 12vw, 130px);
-  height: clamp(90px, 18vw, 195px);
-}
-
-/* The three vertical stripes that make up the N */
-.nf-stripe {
-  position: absolute;
-  top: 0;
-  width: 31%;
-  height: 100%;
-  transform-origin: bottom center;
-}
-
-.nf-stripe-left  { left: 0;   background: #E50914; animation: stripeRise 0.75s cubic-bezier(0.4,0,0.2,1) 0.15s both; }
-.nf-stripe-right { right: 0;  background: #E50914; animation: stripeRise 0.75s cubic-bezier(0.4,0,0.2,1) 0.15s both; }
-.nf-stripe-diag  {
-  left: 50%; transform: translateX(-50%);
+#nf-intro-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%; height: 100%;
-  background: transparent;
-  opacity: 0;
-  animation: diagFade 0.2s ease 0.85s forwards;
+  background: #000;
+  overflow: hidden;
 }
 
-/* SVG diagonal bar that forms the slash of the N */
-.nf-stripe-diag svg {
-  width: 100%;
-  height: 100%;
+netflixintro {
+  display: block;
+  position: relative;
+  width: 300px; height: 300px;
+  overflow: hidden;
+  animation-name: zoom-in;
+  animation-delay: 0.5s;
+  animation-duration: 3.5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
 }
 
-@keyframes stripeRise {
-  0%   { clip-path: inset(100% 0 0 0); opacity: 1; }
-  100% { clip-path: inset(0% 0 0 0);   opacity: 1; }
-}
-
-@keyframes diagFade {
-  to { opacity: 1; }
-}
-
-/* Shadow/glow that appears after reveal */
-.nf-ribbon-stage::after {
-  content: '';
+netflixintro::before {
+  content: "";
   position: absolute;
-  inset: -40%;
-  background: radial-gradient(ellipse at center, rgba(229,9,20,0.55) 0%, transparent 65%);
-  opacity: 0;
-  animation: glowIn 0.5s ease 0.9s forwards;
-  pointer-events: none;
+  display: block;
+  background-color: #000;
+  width: 150%; height: 30%;
+  left: -25%; bottom: -27%;
+  border-radius: 50%;
+  z-index: 5;
+  transform-origin: left center;
 }
 
-@keyframes glowIn {
-  to { opacity: 1; }
+/* N letter config */
+netflixintro[letter="N"] { transform-origin: 30% center; }
+
+netflixintro[letter="N"] .helper-1 {
+  width: 19.5%; height: 100%;
+  background-color: rgba(228,9,19,0.5);
+  left: 22.4%; top: 0;
+  transform: rotate(180deg);
+  animation-name: fading-lumieres-box;
+  animation-duration: 2s; animation-delay: 0.6s; animation-fill-mode: forwards;
+}
+netflixintro[letter="N"] .helper-1 .effect-brush {
+  animation-name: brush-moving;
+  animation-duration: 2.5s; animation-fill-mode: forwards; animation-delay: 1.2s;
+}
+netflixintro[letter="N"] .helper-1 [class*="fur-"] { bottom:0; height:40%; }
+
+netflixintro[letter="N"] .helper-3 {
+  width: 19%; height: 150%;
+  left: 40.5%; top: -25%;
+  transform: rotate(-19.5deg);
+  box-shadow: 0px 0px 35px -12px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+netflixintro[letter="N"] .helper-3 .effect-brush {
+  animation-name: brush-moving;
+  animation-duration: 2s; animation-fill-mode: forwards; animation-delay: 0.8s;
 }
 
-/* Light sweep across the N */
-.nf-sweep {
+netflixintro[letter="N"] .helper-2 {
+  width: 19.5%; height: 100%;
+  left: 57.8%; top: 0;
+  transform: rotate(180deg);
+  overflow: hidden;
+}
+netflixintro[letter="N"] .helper-2 .effect-brush {
+  animation-name: brush-moving;
+  animation-duration: 2s; animation-fill-mode: forwards; animation-delay: 0.5s;
+}
+
+/* shared helper styles */
+[class*="helper-"] { position: absolute; }
+
+.effect-brush {
   position: absolute;
-  top: 0; left: -100%;
-  width: 60%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
-  animation: sweep 0.5s ease-in-out 1s forwards;
-  pointer-events: none;
+  width: 100%; height: 300%;
+  top: 0; overflow: hidden;
+}
+.effect-brush::before {
+  display: block; content: "";
+  position: absolute;
+  background-color: #e40913;
+  width: 100%; height: 70%;
+  box-shadow: 0px 0px 29px 24px #e40913;
 }
 
-@keyframes sweep {
-  0%   { left: -60%; opacity: 0; }
-  20%  { opacity: 1; }
-  100% { left: 130%; opacity: 0; }
+[class*="fur-"] { display:block; position:absolute; bottom:10%; height:30%; }
+
+.fur-1  { left:0%;    width:3.8%; background:linear-gradient(to bottom,#e40913 0%,#e40913 15%,rgba(0,0,0,0) 81%,rgba(0,0,0,0) 100%); }
+.fur-2  { left:3.8%;  width:2.8%; background:linear-gradient(to bottom,#e40913 0%,#e40913 10%,rgba(0,0,0,0) 62%,rgba(0,0,0,0) 100%); }
+.fur-3  { left:6.6%;  width:4.8%; background:linear-gradient(to bottom,#e40913 0%,#e40913 37%,rgba(0,0,0,0) 100%); }
+.fur-4  { left:11.4%; width:4%;   background:linear-gradient(to bottom,#e40913 0%,#e40913 23%,rgba(0,0,0,0) 100%); }
+.fur-5  { left:15.4%; width:4%;   background:linear-gradient(to bottom,#e40913 0%,#e40913 15%,rgba(0,0,0,0) 86%,rgba(0,0,0,0) 100%); }
+.fur-6  { left:19.4%; width:2.5%; background:linear-gradient(to bottom,#e40913 0%,#e40913 27%,rgba(0,0,0,0) 89%,rgba(0,0,0,0) 100%); }
+.fur-7  { left:21.9%; width:4%;   background:linear-gradient(to bottom,#e40913 0%,#e40913 20%,rgba(0,0,0,0) 100%); }
+.fur-8  { left:25.9%; width:2%;   background:linear-gradient(to bottom,#e40913 0%,#e40913 30%,rgba(0,0,0,0) 100%); }
+.fur-9  { left:27.9%; width:4%;   background:linear-gradient(to bottom,#e40913 0%,#e40913 35%,rgba(0,0,0,0) 95%,rgba(0,0,0,0) 100%); }
+.fur-10 { left:31.9%; width:3.5%; background:linear-gradient(to bottom,#e40913 0%,#e40913 39%,rgba(0,0,0,0) 95%,rgba(0,0,0,0) 100%); }
+.fur-11 { left:35.4%; width:2%;   background:linear-gradient(to bottom,#e40913 0%,#e40913 34%,rgba(0,0,0,0) 95%,rgba(0,0,0,0) 100%); }
+.fur-12 { left:37.4%; width:2.6%; background:linear-gradient(to bottom,#e40913 0%,#e40913 22%,rgba(0,0,0,0) 95%,rgba(0,0,0,0) 100%); }
+.fur-13 { left:40%;   width:6%;   background:linear-gradient(to bottom,#e40913 0%,#e40913 47%,rgba(0,0,0,0) 100%); }
+.fur-14 { left:46%;   width:2%;   background:linear-gradient(to bottom,#e40913 0%,#e40913 36%,rgba(0,0,0,0) 100%); }
+.fur-15 { left:48%;   width:5.5%; background:linear-gradient(to bottom,#e40913 0%,#e40913 29%,rgba(0,0,0,0) 100%); }
+.fur-16 { left:53.5%; width:3%;   background:linear-gradient(to bottom,#e40913 0%,#e40913 39%,rgba(0,0,0,0) 95%,rgba(0,0,0,0) 100%); }
+.fur-17 { left:56.5%; width:4.1%; background:linear-gradient(to bottom,#e40913 0%,#e40913 45%,rgba(0,0,0,0) 100%); }
+.fur-18 { left:60.6%; width:2.4%; background:linear-gradient(to bottom,#e40913 0%,#e40913 34%,rgba(0,0,0,0) 100%); }
+.fur-19 { left:63%;   width:4%;   background:linear-gradient(to bottom,#e40913 0%,#e40913 47%,rgba(0,0,0,0) 100%); }
+.fur-20 { left:67%;   width:1.5%; background:linear-gradient(to bottom,#e40913 0%,#e40913 27%,rgba(0,0,0,0) 95%,rgba(0,0,0,0) 100%); }
+.fur-21 { left:68.5%; width:2.8%; background:linear-gradient(to bottom,#e40913 0%,#e40913 37%,rgba(0,0,0,0) 100%); }
+.fur-22 { left:71.3%; width:2.3%; background:linear-gradient(to bottom,#e40913 0%,#e40913 9%,rgba(0,0,0,0) 100%); }
+.fur-23 { left:73.6%; width:2.2%; background:linear-gradient(to bottom,#e40913 0%,#e40913 28%,rgba(0,0,0,0) 92%,rgba(0,0,0,0) 100%); }
+.fur-24 { left:75.8%; width:1%;   background:linear-gradient(to bottom,#e40913 0%,#e40913 37%,rgba(0,0,0,0) 100%); }
+.fur-25 { left:76.8%; width:2.1%; background:linear-gradient(to bottom,#e40913 0%,#e40913 28%,rgba(0,0,0,0) 100%); }
+.fur-26 { left:78.9%; width:4.1%; background:linear-gradient(to bottom,#e40913 0%,#e40913 34%,rgba(0,0,0,0) 100%); }
+.fur-27 { left:83%;   width:2.5%; background:linear-gradient(to bottom,#e40913 0%,#e40913 21%,rgba(0,0,0,0) 100%); }
+.fur-28 { left:85.5%; width:4.5%; background:linear-gradient(to bottom,#e40913 0%,#e40913 39%,rgba(0,0,0,0) 100%); }
+.fur-29 { left:90%;   width:2.8%; background:linear-gradient(to bottom,#e40913 0%,#e40913 30%,rgba(0,0,0,0) 100%); }
+.fur-30 { left:92.8%; width:3.5%; background:linear-gradient(to bottom,#e40913 0%,#e40913 19%,rgba(0,0,0,0) 100%); }
+.fur-31 { left:96.3%; width:3.7%; background:linear-gradient(to bottom,#e40913 0%,#e40913 37%,rgba(0,0,0,0) 100%); }
+
+.effect-lumieres {
+  position: absolute; width:100%; height:100%; opacity:0;
+  animation-name: showing-lumieres;
+  animation-duration: 2s; animation-delay: 1.6s; animation-fill-mode: forwards;
 }
 
-/* Full-screen flash on complete */
-.nf-flash {
-  position: fixed;
-  inset: 0;
-  background: rgba(229,9,20,0.06);
-  opacity: 0;
-  animation: flashIn 0.3s ease 1s forwards;
-  pointer-events: none;
+[class*="lamp-"] {
+  position: absolute; display:block; height:100%;
+  box-shadow: 0px 0px 10px 0px rgba(228,9,19,0.75);
+  background: var(--color);
+}
+[class*="lamp-"]::before {
+  position:absolute; content:" "; display:block;
+  width:100%; height:100%;
+  background: var(--color);
+  box-shadow: 0px 0px 10px 0px rgba(228,9,19,0.75);
 }
 
-@keyframes flashIn {
-  0%   { opacity: 0; }
-  40%  { opacity: 1; }
-  100% { opacity: 0; }
+.lamp-1  { --color:#ff0100; left:0.7%;  width:1%;   }
+.lamp-2  { --color:#ffde01; left:2.2%;  width:1.4%; }
+.lamp-3  { --color:#ff00cc; left:5.8%;  width:2.1%; }
+.lamp-4  { --color:#04fd8f; left:10.1%; width:2%;   }
+.lamp-5  { --color:#ff0100; left:12.9%; width:1.4%; }
+.lamp-6  { --color:#ff9600; left:15.3%; width:2.8%; }
+.lamp-7  { --color:#0084ff; left:21.2%; width:2.5%; }
+.lamp-8  { --color:#f84006; left:25%;   width:2.5%; }
+.lamp-9  { --color:#ffc601; left:30.5%; width:3%;   }
+.lamp-10 { --color:#ff4800; left:36.3%; width:3%;   }
+.lamp-11 { --color:#fd0100; left:41%;   width:2.2%; }
+.lamp-12 { --color:#01ffff; left:44.2%; width:2.6%; }
+.lamp-13 { --color:#ffc601; left:51.7%; width:0.5%; }
+.lamp-14 { --color:#ffc601; left:52.1%; width:1.8%; }
+.lamp-15 { --color:#0078fe; left:53.8%; width:2.3%; }
+.lamp-16 { --color:#0080ff; left:57.2%; width:2%;   }
+.lamp-17 { --color:#ffae01; left:62.3%; width:2.9%; }
+.lamp-18 { --color:#ff00bf; left:65.8%; width:1.7%; }
+.lamp-19 { --color:#a601f4; left:72.8%; width:0.8%; }
+.lamp-20 { --color:#f30b34; left:74.3%; width:2%;   }
+.lamp-21 { --color:#ff00bf; left:79.8%; width:2%;   }
+.lamp-22 { --color:#04fd8f; left:78.2%; width:2%;   }
+.lamp-23 { --color:#01ffff; left:78.5%; width:2%;   }
+.lamp-24 { --color:#a201ff; left:85.3%; width:1.1%; }
+.lamp-25 { --color:#ec0014; left:86.9%; width:1.1%; }
+.lamp-26 { --color:#0078fe; left:88.8%; width:2%;   }
+.lamp-27 { --color:#ff0036; left:92.4%; width:2.4%; }
+.lamp-28 { --color:#06f98c; left:96.2%; width:2.1%; }
+
+.lamp-1,.lamp-3,.lamp-5,.lamp-7,.lamp-9,.lamp-11,.lamp-13,.lamp-15,.lamp-17,.lamp-19,.lamp-21,.lamp-23,.lamp-25,.lamp-27 {
+  animation-name: lumieres-moving-left; animation-duration:5s; animation-fill-mode:forwards;
 }
+.lamp-1::before,.lamp-3::before,.lamp-5::before,.lamp-7::before,.lamp-9::before,.lamp-11::before,.lamp-13::before,.lamp-15::before,.lamp-17::before,.lamp-19::before,.lamp-21::before,.lamp-23::before,.lamp-25::before,.lamp-27::before {
+  animation-name: lumieres-moving-left; animation-duration:5.5s;
+}
+.lamp-2,.lamp-4,.lamp-6,.lamp-8,.lamp-10,.lamp-12,.lamp-14,.lamp-16,.lamp-18,.lamp-20,.lamp-22,.lamp-24,.lamp-26,.lamp-28 {
+  animation-name: lumieres-moving-right; animation-duration:5s; animation-fill-mode:forwards;
+}
+.lamp-2::before,.lamp-4::before,.lamp-6::before,.lamp-8::before,.lamp-10::before,.lamp-12::before,.lamp-14::before,.lamp-16::before,.lamp-18::before,.lamp-20::before,.lamp-22::before,.lamp-24::before,.lamp-26::before,.lamp-28::before {
+  animation-name: lumieres-moving-right; animation-duration:5.5s;
+}
+
+@keyframes brush-moving   { 0%{transform:translateY(0);} 100%{transform:translateY(-100%);} }
+@keyframes fading-out     { 0%{opacity:1;} 100%{opacity:0;} }
+@keyframes lumieres-moving-right { 0%{transform:translate(0);} 40%{transform:translate(-10px) scaleX(1);} 50%{transform:translate(-60px);} 100%{transform:translate(-120px) scaleX(3);} }
+@keyframes lumieres-moving-left  { 0%{transform:translate(0);} 40%{transform:translate(10px) scaleX(1);}  50%{transform:translate(60px);}  100%{transform:translate(120px) scaleX(3);} }
+@keyframes zoom-in        { 0%{transform:scale(1);} 100%{transform:scale(15);} }
+@keyframes showing-lumieres { 0%{opacity:0;} 100%{opacity:1;} }
+@keyframes fading-lumieres-box { 0%{background-color:rgba(228,9,19,0.5);} 100%{background-color:rgba(228,9,19,0);} }
 
 /* ══ PROFILES ══ */
-#screen-profiles {
-  background: var(--dark);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 48px;
-  position: relative;
-}
-
-.profiles-logo { position: absolute; top: 28px; left: 40px; }
-
-#screen-profiles h1 { font-size: 34px; font-weight: 400; }
-
-.profiles-row { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
-
-.profile-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  cursor: pointer;
-}
-
-.profile-item:hover .profile-pic { border-color: white; }
-.profile-item:hover .profile-label { color: white; }
-
-.profile-pic {
-  width: clamp(90px, 13vw, 152px);
-  height: clamp(90px, 13vw, 152px);
-  border-radius: 4px;
-  border: 3px solid transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: clamp(36px, 5vw, 60px);
-  transition: border-color 0.15s;
-  overflow: hidden;
-}
-
-.profile-pic img { width: 100%; height: 100%; object-fit: cover; border-radius: 2px; }
-
-.profile-label { font-size: 16px; color: #808080; transition: color 0.15s; }
-
-.manage-btn {
-  background: transparent;
-  border: 1px solid #808080;
-  color: #808080;
-  padding: 10px 24px;
-  border-radius: 2px;
-  font-size: 16px;
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: border-color 0.15s, color 0.15s;
-}
-
-.manage-btn:hover { border-color: white; color: white; }
+#screen-profiles { background:var(--dark); flex-direction:column; align-items:center; justify-content:center; gap:48px; position:relative; }
+.profiles-logo { position:absolute; top:28px; left:40px; }
+#screen-profiles h1 { font-size:34px; font-weight:400; }
+.profiles-row { display:flex; gap:24px; flex-wrap:wrap; justify-content:center; }
+.profile-item { display:flex; flex-direction:column; align-items:center; gap:14px; cursor:pointer; }
+.profile-item:hover .profile-pic  { border-color:white; }
+.profile-item:hover .profile-label { color:white; }
+.profile-pic { width:clamp(90px,13vw,152px); height:clamp(90px,13vw,152px); border-radius:4px; border:3px solid transparent; display:flex; align-items:center; justify-content:center; font-size:clamp(36px,5vw,60px); transition:border-color 0.15s; overflow:hidden; }
+.profile-pic img { width:100%; height:100%; object-fit:cover; border-radius:2px; }
+.profile-label { font-size:16px; color:#808080; transition:color 0.15s; }
+.manage-btn { background:transparent; border:1px solid #808080; color:#808080; padding:10px 24px; border-radius:2px; font-size:16px; cursor:pointer; letter-spacing:1px; transition:border-color 0.15s,color 0.15s; }
+.manage-btn:hover { border-color:white; color:white; }
 
 /* ══ HOME ══ */
-#screen-home {
-  flex-direction: column;
-  background: var(--dark);
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 100vh;
-}
-
-/* Navbar */
-.nf-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  padding: 0 4%;
-  height: 68px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-  transition: background 0.4s;
-}
-
-.nf-nav.solid { background: rgba(20,20,20,0.98); }
-
-.nf-nav-links {
-  display: flex;
-  gap: 18px;
-  margin-left: 28px;
-  list-style: none;
-}
-
-.nf-nav-links li a {
-  color: #e5e5e5;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.nf-nav-links li:first-child a { font-weight: 700; color: white; }
-
-.nf-nav-right { margin-left: auto; display: flex; align-items: center; gap: 20px; }
-
-.nf-nav-icon { font-size: 20px; cursor: pointer; }
-
-.nf-nav-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-/* Hero */
-.nf-hero {
-  height: 56.25vw;
-  max-height: 95vh;
-  min-height: 400px;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-}
-
-.nf-hero-img {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #1a0000 0%, #4a0010 40%, #1a0000 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 100px;
-}
-
+#screen-home { flex-direction:column; background:var(--dark); overflow-y:auto; overflow-x:hidden; height:100vh; }
+.nf-nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; padding:0 4%; height:68px; background:linear-gradient(to bottom,rgba(0,0,0,0.9),transparent); transition:background 0.4s; }
+.nf-nav.solid { background:rgba(20,20,20,0.98); }
+.nf-nav-links { display:flex; gap:18px; margin-left:28px; list-style:none; }
+.nf-nav-links li a { color:#e5e5e5; text-decoration:none; font-size:14px; }
+.nf-nav-links li:first-child a { font-weight:700; color:white; }
+.nf-nav-right { margin-left:auto; display:flex; align-items:center; gap:20px; }
+.nf-nav-icon { font-size:20px; cursor:pointer; }
+.nf-nav-avatar { width:32px; height:32px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:16px; cursor:pointer; overflow:hidden; }
+.nf-hero { height:56.25vw; max-height:95vh; min-height:400px; position:relative; display:flex; align-items:flex-end; overflow:hidden; }
+.nf-hero-img { position:absolute; inset:0; background:linear-gradient(135deg,#1a0000,#4a0010 40%,#1a0000); display:flex; align-items:center; justify-content:center; font-size:100px; }
 .nf-hero-img img { width:100%; height:100%; object-fit:cover; }
-
-.hero-vignette {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to right, rgba(20,20,20,0.95) 0%, rgba(20,20,20,0) 55%),
-    linear-gradient(to top, rgba(20,20,20,1) 0%, rgba(20,20,20,0) 35%);
-}
-
+.hero-vignette { position:absolute; inset:0; background:linear-gradient(to right,rgba(20,20,20,0.95) 0%,rgba(20,20,20,0) 55%),linear-gradient(to top,rgba(20,20,20,1) 0%,rgba(20,20,20,0) 35%); }
 .heart-layer { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; }
-
-.hrt {
-  position: absolute;
-  animation: floatUp linear infinite;
-  opacity: 0;
-}
-
-@keyframes floatUp {
-  0%   { transform: translateY(110%); opacity: 0; }
-  10%  { opacity: 0.5; }
-  90%  { opacity: 0.2; }
-  100% { transform: translateY(-20vh); opacity: 0; }
-}
-
-.nf-hero-content {
-  position: relative;
-  z-index: 2;
-  padding: 0 4% 5%;
-  max-width: 42%;
-  min-width: 280px;
-}
-
-.hero-show-title {
-  font-family: 'Bebas Neue', cursive;
-  font-size: clamp(44px, 8vw, 88px);
-  line-height: 1;
-  text-shadow: 2px 4px 16px rgba(0,0,0,0.7);
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-}
-
-.hero-meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 18px;
-  font-size: 15px;
-  flex-wrap: wrap;
-}
-
-.hero-meta .match { color: #46d369; font-weight: 700; }
-.hero-meta .year  { color: #ddd; }
-.hero-meta .badge { border: 1px solid #aaa; color: #aaa; padding: 1px 6px; font-size: 12px; }
-
-.hero-desc {
-  font-size: clamp(13px, 1.5vw, 16px);
-  color: #ddd;
-  line-height: 1.5;
-  margin-bottom: 24px;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-}
-
-.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-
-.hero-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 26px;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  transition: background 0.15s, opacity 0.15s;
-}
-
-.hero-btn.play { background: white; color: #000; }
-.hero-btn.play:hover { background: rgba(255,255,255,0.75); }
-.hero-btn.info { background: rgba(109,109,110,0.7); color: white; }
-.hero-btn.info:hover { background: rgba(109,109,110,0.4); }
-
-/* Content rows */
-.nf-rows { padding: 0 4% 60px; margin-top: -80px; position: relative; z-index: 2; }
-
-.nf-row { margin-bottom: 32px; }
-
-.nf-row-title {
-  font-size: clamp(14px, 2vw, 20px);
-  font-weight: 700;
-  color: var(--light);
-  margin-bottom: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.nf-row-title:hover .see-all { opacity: 1; }
-.see-all { font-size: 13px; color: #54b9c5; opacity: 0; transition: opacity 0.15s; font-weight: 400; letter-spacing: 1px; }
-
-.nf-cards { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 20px 0; }
-.nf-cards::-webkit-scrollbar { display: none; }
-
-/* Card */
-.nf-card {
-  flex: 0 0 auto;
-  width: clamp(140px, 22vw, 250px);
-  border-radius: 4px;
-  overflow: visible;
-  cursor: pointer;
-  transition: transform 0.3s;
-  position: relative;
-  z-index: 1;
-}
-
-.nf-card:hover {
-  transform: scale(1.3) translateY(-10%);
-  z-index: 50;
-}
-
-.nf-card:first-child:hover { transform-origin: left center; }
-.nf-card:last-child:hover  { transform-origin: right center; }
-
-.card-thumb {
-  width: 100%;
-  aspect-ratio: 16/9;
-  border-radius: 4px 4px 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: clamp(24px, 4vw, 44px);
-  overflow: hidden;
-  position: relative;
-}
-
+.hrt { position:absolute; animation:floatUp linear infinite; opacity:0; }
+@keyframes floatUp { 0%{transform:translateY(110%);opacity:0;} 10%{opacity:0.5;} 90%{opacity:0.2;} 100%{transform:translateY(-20vh);opacity:0;} }
+.nf-hero-content { position:relative; z-index:2; padding:0 4% 5%; max-width:42%; min-width:280px; }
+.hero-show-title { font-family:'Bebas Neue',cursive; font-size:clamp(44px,8vw,88px); line-height:1; text-shadow:2px 4px 16px rgba(0,0,0,0.7); letter-spacing:2px; margin-bottom:20px; }
+.hero-meta { display:flex; align-items:center; gap:12px; margin-bottom:18px; font-size:15px; flex-wrap:wrap; }
+.hero-meta .match { color:#46d369; font-weight:700; }
+.hero-meta .year  { color:#ddd; }
+.hero-meta .badge { border:1px solid #aaa; color:#aaa; padding:1px 6px; font-size:12px; }
+.hero-desc { font-size:clamp(13px,1.5vw,16px); color:#ddd; line-height:1.5; margin-bottom:24px; text-shadow:1px 1px 4px rgba(0,0,0,0.8); }
+.hero-actions { display:flex; gap:10px; flex-wrap:wrap; }
+.hero-btn { display:flex; align-items:center; gap:8px; padding:10px 26px; border-radius:4px; font-size:16px; font-weight:700; border:none; cursor:pointer; transition:background 0.15s; }
+.hero-btn.play { background:white; color:#000; } .hero-btn.play:hover { background:rgba(255,255,255,0.75); }
+.hero-btn.info { background:rgba(109,109,110,0.7); color:white; } .hero-btn.info:hover { background:rgba(109,109,110,0.4); }
+.nf-rows { padding:0 4% 60px; margin-top:-80px; position:relative; z-index:2; }
+.nf-row { margin-bottom:32px; }
+.nf-row-title { font-size:clamp(14px,2vw,20px); font-weight:700; color:var(--light); margin-bottom:12px; display:inline-flex; align-items:center; gap:8px; }
+.nf-row-title:hover .see-all { opacity:1; }
+.see-all { font-size:13px; color:#54b9c5; opacity:0; transition:opacity 0.15s; font-weight:400; letter-spacing:1px; }
+.nf-cards { display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; padding:20px 0; }
+.nf-cards::-webkit-scrollbar { display:none; }
+.nf-card { flex:0 0 auto; width:clamp(140px,22vw,250px); border-radius:4px; overflow:visible; cursor:pointer; transition:transform 0.3s; position:relative; z-index:1; }
+.nf-card:hover { transform:scale(1.3) translateY(-10%); z-index:50; }
+.nf-card:first-child:hover { transform-origin:left center; }
+.nf-card:last-child:hover  { transform-origin:right center; }
+.card-thumb { width:100%; aspect-ratio:16/9; border-radius:4px 4px 0 0; display:flex; align-items:center; justify-content:center; font-size:clamp(24px,4vw,44px); overflow:hidden; position:relative; }
 .card-thumb img { width:100%; height:100%; object-fit:cover; }
-
-.lock-veil {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.78);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.lock-veil .lk-icon { font-size: 26px; }
-.lock-veil .lk-text { font-size: 11px; color: #aaa; letter-spacing: 1px; }
-
-.card-detail {
-  background: var(--card);
-  border-radius: 0 0 4px 4px;
-  padding: 12px;
-  display: none;
-  flex-direction: column;
-  gap: 8px;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.8);
-}
-
-.nf-card:hover .card-detail { display: flex; }
-
-.card-detail-btns { display: flex; align-items: center; gap: 8px; }
-
-.cd-btn {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  flex: 0 0 auto;
-  transition: background 0.15s;
-}
-
-.cd-btn.play  { background: white; color: black; }
-.cd-btn.play:hover { background: #ddd; }
-.cd-btn.outline { background: transparent; border: 2px solid #aaa; color: white; }
-.cd-btn.outline:hover { border-color: white; }
-.cd-btn.chev  { background: transparent; border: 2px solid #aaa; color: white; margin-left: auto; }
-.cd-btn.chev:hover { border-color: white; }
-
-.cd-title  { font-size: 13px; font-weight: 700; color: white; }
-.cd-match  { color: #46d369; font-size: 12px; font-weight: 700; }
-.cd-meta   { font-size: 11px; color: #808080; }
-
-/* ══ MODAL ══ */
-#modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  z-index: 9000;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-}
-
-#modal.open { display: flex; }
-
-.modal-wrap {
-  background: #181818;
-  border-radius: 6px;
-  width: 100%;
-  max-width: 850px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 32px 80px rgba(0,0,0,0.9);
-  animation: mIn 0.25s ease;
-}
-
-@keyframes mIn {
-  from { opacity:0; transform:scale(0.95); }
-  to   { opacity:1; transform:scale(1); }
-}
-
-.modal-video {
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.modal-video video,
-.modal-video iframe { width:100%; height:100%; object-fit:contain; border:none; }
-
+.lock-veil { position:absolute; inset:0; background:rgba(0,0,0,0.78); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; }
+.lock-veil .lk-icon { font-size:26px; } .lock-veil .lk-text { font-size:11px; color:#aaa; letter-spacing:1px; }
+.card-detail { background:var(--card); border-radius:0 0 4px 4px; padding:12px; display:none; flex-direction:column; gap:8px; box-shadow:0 16px 40px rgba(0,0,0,0.8); }
+.nf-card:hover .card-detail { display:flex; }
+.card-detail-btns { display:flex; align-items:center; gap:8px; }
+.cd-btn { width:34px; height:34px; border-radius:50%; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:15px; flex:0 0 auto; transition:background 0.15s; }
+.cd-btn.play { background:white; color:black; } .cd-btn.play:hover { background:#ddd; }
+.cd-btn.outline { background:transparent; border:2px solid #aaa; color:white; } .cd-btn.outline:hover { border-color:white; }
+.cd-btn.chev { background:transparent; border:2px solid #aaa; color:white; margin-left:auto; } .cd-btn.chev:hover { border-color:white; }
+.cd-title { font-size:13px; font-weight:700; color:white; } .cd-match { color:#46d369; font-size:12px; font-weight:700; } .cd-meta { font-size:11px; color:#808080; }
+#modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9000; align-items:center; justify-content:center; padding:40px 20px; }
+#modal.open { display:flex; }
+.modal-wrap { background:#181818; border-radius:6px; width:100%; max-width:850px; position:relative; overflow:hidden; box-shadow:0 0 0 1px rgba(255,255,255,0.08),0 32px 80px rgba(0,0,0,0.9); animation:mIn 0.25s ease; }
+@keyframes mIn { from{opacity:0;transform:scale(0.95);} to{opacity:1;transform:scale(1);} }
+.modal-video { width:100%; aspect-ratio:16/9; background:#000; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.modal-video video,.modal-video iframe { width:100%; height:100%; object-fit:contain; border:none; }
 .modal-placeholder { text-align:center; padding:40px; color:#aaa; }
 .modal-placeholder .ph-icon { font-size:56px; margin-bottom:20px; }
 .modal-placeholder h3 { font-size:18px; color:white; margin-bottom:10px; }
-.modal-placeholder p  { font-size:14px; line-height:1.7; }
+.modal-placeholder p { font-size:14px; line-height:1.7; }
 .modal-placeholder code { background:#333; padding:2px 8px; border-radius:3px; color:#e5e5e5; font-size:12px; }
-
-.modal-close {
-  position: absolute;
-  top: 14px; right: 14px;
-  z-index: 10;
-  width: 36px; height: 36px;
-  background: rgba(0,0,0,0.7);
-  border: none; border-radius: 50%;
-  color: white; font-size: 18px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s;
-}
-
-.modal-close:hover { background: rgba(255,255,255,0.15); }
-
-.modal-body { padding: 24px 32px 32px; }
-
+.modal-close { position:absolute; top:14px; right:14px; z-index:10; width:36px; height:36px; background:rgba(0,0,0,0.7); border:none; border-radius:50%; color:white; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s; }
+.modal-close:hover { background:rgba(255,255,255,0.15); }
+.modal-body { padding:24px 32px 32px; }
 .modal-meta { display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
-.modal-meta .match { color:#46d369; font-weight:700; font-size:15px; }
-.modal-meta .year  { font-size:15px; color:#bcbcbc; }
-.modal-meta .badge { border:1px solid #777; color:#bcbcbc; font-size:11px; padding:1px 6px; }
-
+.modal-meta .match { color:#46d369; font-weight:700; font-size:15px; } .modal-meta .year { font-size:15px; color:#bcbcbc; } .modal-meta .badge { border:1px solid #777; color:#bcbcbc; font-size:11px; padding:1px 6px; }
 .modal-title { font-size:26px; font-weight:700; margin-bottom:14px; }
-.modal-desc  { font-size:15px; color:#d2d2d2; line-height:1.6; }
-
-.modal-play-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 30px;
-  background: white;
-  color: black;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.modal-play-btn:hover { background: rgba(255,255,255,0.75); }
+.modal-desc { font-size:15px; color:#d2d2d2; line-height:1.6; }
+.modal-play-btn { display:inline-flex; align-items:center; gap:8px; padding:12px 30px; background:white; color:black; border:none; border-radius:4px; font-size:16px; font-weight:700; cursor:pointer; margin-top:20px; }
+.modal-play-btn:hover { background:rgba(255,255,255,0.75); }
 </style>
 </head>
 <body>
 
-<!-- Netflix SVG logo (reused inline) -->
-<template id="nf-logo-tpl">
-  <svg viewBox="0 0 111 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M105.062 14.28L111 30c-1.75-.25-3.499-.563-5.28-.845l-3.345-9.293-3.437 8.96c-1.687-.282-3.344-.376-5.031-.595l6.031-15.98-5.594-14.843h5.438l3.03 8.702 3.157-8.702h5.5l-6.406 16.876zM90.937 0v27.97c-1.656.094-3.344.157-5 .313V0h5zM81.78 0l.032 11.01L90.28 0h5.5L86.5 12.186l9.562 17.784c-1.687.282-3.344.595-5 .939l-6.968-13.81-2.344 2.72V30.94c-1.656.282-3.312.501-5 .752V0h5.03zM64.25 4.78V30c-1.688 0-3.344.032-5 .063V4.78h-5.53V0H69.78v4.78h-5.53zM44.813 15.344v4.624h8.031v4.75H44.813V30c-1.688.031-3.344.094-5 .125V0h13.563v4.78H44.813v6.032h6.656v4.5l-6.656.032zM27.875.001V25.22c2.657-.157 5.313-.25 7.97-.25V30c-4.313.25-8.594.563-12.875.97V.001h4.905zM18.53.001v30.468c-1.718-.156-3.406-.28-5.125-.376V10.25L6.5 30.47C4.375 30.313 2.25 30.22 0 30.22V0l5.03-.001v19.156L12.031.001H18.53z" fill="#E50914"/>
-  </svg>
-</template>
-
-<!-- ══════════ PASSWORD ══════════ -->
+<!-- PASSWORD -->
 <div id="screen-password" class="screen active">
   <div class="pw-logo">
-    <svg width="148" viewBox="0 0 111 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M105.062 14.28L111 30c-1.75-.25-3.499-.563-5.28-.845l-3.345-9.293-3.437 8.96c-1.687-.282-3.344-.376-5.031-.595l6.031-15.98-5.594-14.843h5.438l3.03 8.702 3.157-8.702h5.5l-6.406 16.876zM90.937 0v27.97c-1.656.094-3.344.157-5 .313V0h5zM81.78 0l.032 11.01L90.28 0h5.5L86.5 12.186l9.562 17.784c-1.687.282-3.344.595-5 .939l-6.968-13.81-2.344 2.72V30.94c-1.656.282-3.312.501-5 .752V0h5.03zM64.25 4.78V30c-1.688 0-3.344.032-5 .063V4.78h-5.53V0H69.78v4.78h-5.53zM44.813 15.344v4.624h8.031v4.75H44.813V30c-1.688.031-3.344.094-5 .125V0h13.563v4.78H44.813v6.032h6.656v4.5l-6.656.032zM27.875.001V25.22c2.657-.157 5.313-.25 7.97-.25V30c-4.313.25-8.594.563-12.875.97V.001h4.905zM18.53.001v30.468c-1.718-.156-3.406-.28-5.125-.376V10.25L6.5 30.47C4.375 30.313 2.25 30.22 0 30.22V0l5.03-.001v19.156L12.031.001H18.53z" fill="#E50914"/>
-    </svg>
+    <img class="nf-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix">
   </div>
-
   <div class="pw-box">
     <h1>Sign In</h1>
     <input type="password" id="pw-input" class="pw-input" placeholder="Enter your code" maxlength="12" autocomplete="off"/>
@@ -659,58 +337,118 @@ body {
   </div>
 </div>
 
-<!-- ══════════ INTRO ══════════ -->
-<div id="screen-intro" class="screen" style="display:none;position:fixed;inset:0;">
-  <div class="intro-radial"></div>
-  <div class="intro-wrap">
-    <div class="intro-beam"></div>
-    <svg class="nf-svg-intro" viewBox="0 0 8 12" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="0,0 0,12 2.2,9.2 2.2,0" fill="#E50914"/>
-      <polygon points="0,0 2.2,9.2 8,0" fill="#B81D13"/>
-      <polygon points="5.8,0 5.8,12 8,12 8,2.8" fill="#E50914"/>
-      <polygon points="0,12 8,12 8,2.8 5.8,12" fill="#B81D13"/>
-    </svg>
+<!-- INTRO — Authentic Netflix animation -->
+<div id="screen-intro" class="screen">
+  <div id="nf-intro-container">
+    <netflixintro letter="N">
+
+      <div class="helper-1">
+        <div class="effect-brush">
+          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span>
+          <span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span>
+          <span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span>
+          <span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span>
+          <span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span>
+          <span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span>
+          <span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span>
+          <span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span>
+          <span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span>
+          <span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span>
+          <span class="fur-1"></span>
+        </div>
+        <div class="effect-lumieres">
+          <span class="lamp-1"></span><span class="lamp-2"></span><span class="lamp-3"></span>
+          <span class="lamp-4"></span><span class="lamp-5"></span><span class="lamp-6"></span>
+          <span class="lamp-7"></span><span class="lamp-8"></span><span class="lamp-9"></span>
+          <span class="lamp-10"></span><span class="lamp-11"></span><span class="lamp-12"></span>
+          <span class="lamp-13"></span><span class="lamp-14"></span><span class="lamp-15"></span>
+          <span class="lamp-16"></span><span class="lamp-17"></span><span class="lamp-18"></span>
+          <span class="lamp-19"></span><span class="lamp-20"></span><span class="lamp-21"></span>
+          <span class="lamp-22"></span><span class="lamp-23"></span><span class="lamp-24"></span>
+          <span class="lamp-25"></span><span class="lamp-26"></span><span class="lamp-27"></span>
+          <span class="lamp-28"></span>
+        </div>
+      </div>
+
+      <div class="helper-2">
+        <div class="effect-brush">
+          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span>
+          <span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span>
+          <span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span>
+          <span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span>
+          <span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span>
+          <span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span>
+          <span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span>
+          <span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span>
+          <span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span>
+          <span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span>
+          <span class="fur-1"></span>
+        </div>
+      </div>
+
+      <div class="helper-3">
+        <div class="effect-brush">
+          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span>
+          <span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span>
+          <span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span>
+          <span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span>
+          <span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span>
+          <span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span>
+          <span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span>
+          <span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span>
+          <span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span>
+          <span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span>
+          <span class="fur-1"></span>
+        </div>
+      </div>
+
+      <div class="helper-4">
+        <div class="effect-brush">
+          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span>
+          <span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span>
+          <span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span>
+          <span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span>
+          <span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span>
+          <span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span>
+          <span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span>
+          <span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span>
+          <span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span>
+          <span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span>
+          <span class="fur-1"></span>
+        </div>
+      </div>
+
+    </netflixintro>
   </div>
 </div>
 
-<!-- ══════════ PROFILES ══════════ -->
+<!-- PROFILES -->
 <div id="screen-profiles" class="screen" style="position:relative;">
   <div class="profiles-logo">
-    <svg width="120" viewBox="0 0 111 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M105.062 14.28L111 30c-1.75-.25-3.499-.563-5.28-.845l-3.345-9.293-3.437 8.96c-1.687-.282-3.344-.376-5.031-.595l6.031-15.98-5.594-14.843h5.438l3.03 8.702 3.157-8.702h5.5l-6.406 16.876zM90.937 0v27.97c-1.656.094-3.344.157-5 .313V0h5zM81.78 0l.032 11.01L90.28 0h5.5L86.5 12.186l9.562 17.784c-1.687.282-3.344.595-5 .939l-6.968-13.81-2.344 2.72V30.94c-1.656.282-3.312.501-5 .752V0h5.03zM64.25 4.78V30c-1.688 0-3.344.032-5 .063V4.78h-5.53V0H69.78v4.78h-5.53zM44.813 15.344v4.624h8.031v4.75H44.813V30c-1.688.031-3.344.094-5 .125V0h13.563v4.78H44.813v6.032h6.656v4.5l-6.656.032zM27.875.001V25.22c2.657-.157 5.313-.25 7.97-.25V30c-4.313.25-8.594.563-12.875.97V.001h4.905zM18.53.001v30.468c-1.718-.156-3.406-.28-5.125-.376V10.25L6.5 30.47C4.375 30.313 2.25 30.22 0 30.22V0l5.03-.001v19.156L12.031.001H18.53z" fill="#E50914"/>
-    </svg>
+    <img class="nf-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix">
   </div>
-
   <h1>Who's watching?</h1>
-
   <div class="profiles-row">
     <div class="profile-item" onclick="goHome('Levi')">
       <div class="profile-pic" style="background:linear-gradient(135deg,#0a7abf,#034f84);">
         <span>👦</span>
-        <!-- To use a photo, add: <img src="levi.jpg" alt="Levi"> and remove the span above -->
       </div>
       <div class="profile-label">Levi</div>
     </div>
-
     <div class="profile-item" onclick="goHome('Lucy')">
       <div class="profile-pic" style="background:linear-gradient(135deg,#e84393,#a5004e);">
         <span>👧</span>
-        <!-- To use a photo, add: <img src="lucy.jpg" alt="Lucy"> and remove the span above -->
       </div>
       <div class="profile-label">Lucy</div>
     </div>
   </div>
-
   <button class="manage-btn">Manage Profiles</button>
 </div>
 
-<!-- ══════════ HOME ══════════ -->
+<!-- HOME -->
 <div id="screen-home" class="screen" style="flex-direction:column;">
-
   <nav class="nf-nav" id="nf-nav">
-    <svg width="92" viewBox="0 0 111 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M105.062 14.28L111 30c-1.75-.25-3.499-.563-5.28-.845l-3.345-9.293-3.437 8.96c-1.687-.282-3.344-.376-5.031-.595l6.031-15.98-5.594-14.843h5.438l3.03 8.702 3.157-8.702h5.5l-6.406 16.876zM90.937 0v27.97c-1.656.094-3.344.157-5 .313V0h5zM81.78 0l.032 11.01L90.28 0h5.5L86.5 12.186l9.562 17.784c-1.687.282-3.344.595-5 .939l-6.968-13.81-2.344 2.72V30.94c-1.656.282-3.312.501-5 .752V0h5.03zM64.25 4.78V30c-1.688 0-3.344.032-5 .063V4.78h-5.53V0H69.78v4.78h-5.53zM44.813 15.344v4.624h8.031v4.75H44.813V30c-1.688.031-3.344.094-5 .125V0h13.563v4.78H44.813v6.032h6.656v4.5l-6.656.032zM27.875.001V25.22c2.657-.157 5.313-.25 7.97-.25V30c-4.313.25-8.594.563-12.875.97V.001h4.905zM18.53.001v30.468c-1.718-.156-3.406-.28-5.125-.376V10.25L6.5 30.47C4.375 30.313 2.25 30.22 0 30.22V0l5.03-.001v19.156L12.031.001H18.53z" fill="#E50914"/>
-    </svg>
+    <img class="nf-logo-img" style="width:92px;" src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix">
     <ul class="nf-nav-links">
       <li><a href="#">Home</a></li>
       <li><a href="#">Our Memories</a></li>
@@ -721,180 +459,75 @@ body {
       <div class="nf-nav-avatar" id="nav-avatar" style="background:#0a7abf;">👦</div>
     </div>
   </nav>
-
-  <!-- Hero -->
   <div class="nf-hero">
-    <div class="nf-hero-img">
-      💑
-      <!--
-        TO ADD YOUR OWN HERO IMAGE:
-        1. Upload a photo to the same folder as this HTML file
-        2. Replace the 💑 emoji above with:
-           <img src="your-photo.jpg" alt="Us">
-      -->
-    </div>
+    <div class="nf-hero-img">💑</div>
     <div class="hero-vignette"></div>
     <div class="heart-layer" id="heart-layer"></div>
     <div class="nf-hero-content">
       <div class="hero-show-title">1 Month<br>Together</div>
       <div class="hero-meta">
-        <span class="match">99% Match</span>
-        <span class="year">2025</span>
-        <span class="badge">💕 For Us</span>
+        <span class="match">99% Match</span><span class="year">2025</span><span class="badge">💕 For Us</span>
       </div>
       <div class="hero-desc">The beginning of something beautiful. One month of memories, laughter, and love — captured just for Levi &amp; Lucy. Our story is only getting started. ❤️</div>
       <div class="hero-actions">
-        <button class="hero-btn play" onclick="openModal()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg>
-          Play
-        </button>
-        <button class="hero-btn info" onclick="openModal()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-          More Info
-        </button>
+        <button class="hero-btn play" onclick="openModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg>Play</button>
+        <button class="hero-btn info" onclick="openModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>More Info</button>
       </div>
     </div>
   </div>
-
-  <!-- Rows -->
   <div class="nf-rows">
-
     <div class="nf-row">
       <div class="nf-row-title">Our Timeline <span class="see-all">Explore All &rsaquo;</span></div>
       <div class="nf-cards">
-
         <div class="nf-card" onclick="openModal()">
           <div class="card-thumb" style="background:linear-gradient(135deg,#c0392b,#8e44ad);">💑</div>
           <div class="card-detail">
             <div class="card-detail-btns">
               <button class="cd-btn play" onclick="event.stopPropagation();openModal()">▶</button>
-              <button class="cd-btn outline">+</button>
-              <button class="cd-btn outline">👍</button>
+              <button class="cd-btn outline">+</button><button class="cd-btn outline">👍</button>
               <button class="cd-btn chev" onclick="event.stopPropagation();openModal()">&#8964;</button>
             </div>
-            <div class="cd-match">99% Match</div>
-            <div class="cd-title">1 Month Together</div>
-            <div class="cd-meta">Romance · 2025</div>
+            <div class="cd-match">99% Match</div><div class="cd-title">1 Month Together</div><div class="cd-meta">Romance · 2025</div>
           </div>
         </div>
-
-        <div class="nf-card">
-          <div class="card-thumb" style="background:#1a1a1a;">
-            <div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div>
-          </div>
-          <div class="card-detail">
-            <div class="cd-title">3 Months Together</div>
-            <div class="cd-meta" style="color:#e87c03;">🔒 Locked</div>
-          </div>
-        </div>
-
-        <div class="nf-card">
-          <div class="card-thumb" style="background:#1a1a1a;">
-            <div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div>
-          </div>
-          <div class="card-detail">
-            <div class="cd-title">6 Months Together</div>
-            <div class="cd-meta" style="color:#e87c03;">🔒 Locked</div>
-          </div>
-        </div>
-
-        <div class="nf-card">
-          <div class="card-thumb" style="background:#1a1a1a;">
-            <div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div>
-          </div>
-          <div class="card-detail">
-            <div class="cd-title">1 Year Together 💍</div>
-            <div class="cd-meta" style="color:#e87c03;">🔒 Locked</div>
-          </div>
-        </div>
-
-        <div class="nf-card">
-          <div class="card-thumb" style="background:#1a1a1a;">
-            <div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div>
-          </div>
-          <div class="card-detail">
-            <div class="cd-title">2 Years Together ✨</div>
-            <div class="cd-meta" style="color:#e87c03;">🔒 Locked</div>
-          </div>
-        </div>
-
+        <div class="nf-card"><div class="card-thumb" style="background:#1a1a1a;"><div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div></div><div class="card-detail"><div class="cd-title">3 Months Together</div><div class="cd-meta" style="color:#e87c03;">🔒 Locked</div></div></div>
+        <div class="nf-card"><div class="card-thumb" style="background:#1a1a1a;"><div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div></div><div class="card-detail"><div class="cd-title">6 Months Together</div><div class="cd-meta" style="color:#e87c03;">🔒 Locked</div></div></div>
+        <div class="nf-card"><div class="card-thumb" style="background:#1a1a1a;"><div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div></div><div class="card-detail"><div class="cd-title">1 Year Together 💍</div><div class="cd-meta" style="color:#e87c03;">🔒 Locked</div></div></div>
+        <div class="nf-card"><div class="card-thumb" style="background:#1a1a1a;"><div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div></div><div class="card-detail"><div class="cd-title">2 Years Together ✨</div><div class="cd-meta" style="color:#e87c03;">🔒 Locked</div></div></div>
       </div>
     </div>
-
     <div class="nf-row">
       <div class="nf-row-title">💝 Favourites</div>
       <div class="nf-cards">
-
         <div class="nf-card" onclick="openModal()">
           <div class="card-thumb" style="background:linear-gradient(135deg,#f093fb,#f5576c);">🌹</div>
-          <div class="card-detail">
-            <div class="card-detail-btns">
-              <button class="cd-btn play">▶</button>
-              <button class="cd-btn outline">+</button>
-            </div>
-            <div class="cd-title">The Beginning</div>
-            <div class="cd-meta">Where it all started</div>
-          </div>
+          <div class="card-detail"><div class="card-detail-btns"><button class="cd-btn play">▶</button><button class="cd-btn outline">+</button></div><div class="cd-title">The Beginning</div><div class="cd-meta">Where it all started</div></div>
         </div>
-
-        <div class="nf-card">
-          <div class="card-thumb" style="background:#1a1a1a;">
-            <div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">More to come...</span></div>
-          </div>
-          <div class="card-detail">
-            <div class="cd-title">More Memories</div>
-            <div class="cd-meta" style="color:#e87c03;">🔒 Add yours soon</div>
-          </div>
-        </div>
-
+        <div class="nf-card"><div class="card-thumb" style="background:#1a1a1a;"><div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">More to come...</span></div></div><div class="card-detail"><div class="cd-title">More Memories</div><div class="cd-meta" style="color:#e87c03;">🔒 Add yours soon</div></div></div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- ══════════ MODAL ══════════ -->
+<!-- MODAL -->
 <div id="modal">
   <div class="modal-wrap">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-video">
-
       <!--
-        ╔══════════════════════════════════════════════╗
-        ║       HOW TO ADD YOUR VIDEO                  ║
-        ║                                              ║
-        ║  OPTION A — MP4 file on your server:         ║
-        ║  <video controls autoplay style="width:100%">║
-        ║    <source src="video.mp4" type="video/mp4"> ║
-        ║  </video>                                    ║
-        ║                                              ║
-        ║  OPTION B — YouTube embed:                   ║
-        ║  <iframe width="100%" height="100%"          ║
-        ║    src="https://youtube.com/embed/VIDEO_ID"  ║
-        ║    allowfullscreen></iframe>                 ║
-        ║                                              ║
-        ║  OPTION C — Google Drive:                    ║
-        ║  Share → Copy embed link → paste iframe      ║
-        ╚══════════════════════════════════════════════╝
+        HOW TO ADD YOUR VIDEO:
+        Option A — MP4: <video controls autoplay style="width:100%"><source src="video.mp4" type="video/mp4"></video>
+        Option B — YouTube: <iframe width="100%" height="100%" src="https://youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+        Option C — Google Drive: Share → Copy embed link → paste iframe
       -->
-
       <div class="modal-placeholder">
         <div class="ph-icon">🎬</div>
         <h3>Add Your Video Here</h3>
-        <p>
-          Open <code>anniversary.html</code> and find<br>
-          <strong style="color:white;">HOW TO ADD YOUR VIDEO</strong><br><br>
-          Supports MP4, YouTube, or Google Drive.
-        </p>
+        <p>Open <code>anniversary.html</code> and find<br><strong style="color:white;">HOW TO ADD YOUR VIDEO</strong><br><br>Supports MP4, YouTube, or Google Drive.</p>
       </div>
-
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="match">99% Match</span>
-        <span class="year">2025</span>
-        <span class="badge">💕 For Us</span>
-      </div>
+      <div class="modal-meta"><span class="match">99% Match</span><span class="year">2025</span><span class="badge">💕 For Us</span></div>
       <div class="modal-title">1 Month Together 💑</div>
       <div class="modal-desc">The story of our very first month. Every moment, every laugh, every memory — captured just for Levi &amp; Lucy. This is only the beginning of our story. ❤️</div>
       <button class="modal-play-btn">▶ &nbsp;Play</button>
@@ -905,39 +538,39 @@ body {
 <script>
 const SECRET = '090426';
 
-/* Password */
 function checkPW() {
   const val = document.getElementById('pw-input').value.trim();
   if (val === SECRET) {
     showIntro();
   } else {
     const input = document.getElementById('pw-input');
-    const err   = document.getElementById('pw-error');
+    const err = document.getElementById('pw-error');
     input.classList.add('shake');
     err.textContent = 'Incorrect code. Please try again.';
     setTimeout(() => { input.classList.remove('shake'); err.textContent = ''; }, 3000);
   }
 }
-
 document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPW(); });
 
-/* Intro */
 function showIntro() {
   document.getElementById('screen-password').style.display = 'none';
   const el = document.getElementById('screen-intro');
   el.style.display = 'flex';
-  el.style.opacity = '1';
+  el.classList.add('active');
+  // The zoom-in animation runs for 4s total (0.5s delay + 3.5s duration)
+  // After it finishes, fade to profiles
   setTimeout(() => {
-    el.style.transition = 'opacity 0.7s';
+    el.style.transition = 'opacity 0.5s ease';
     el.style.opacity = '0';
     setTimeout(() => {
       el.style.display = 'none';
+      el.style.opacity = '1';
+      el.style.transition = '';
       showScreen('screen-profiles');
-    }, 700);
-  }, 3000);
+    }, 500);
+  }, 3800);
 }
 
-/* Screens */
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => { s.style.display = 'none'; s.classList.remove('active'); });
   const el = document.getElementById(id);
@@ -945,22 +578,19 @@ function showScreen(id) {
   el.classList.add('active');
 }
 
-/* Profile → Home */
 function goHome(name) {
   const av = document.getElementById('nav-avatar');
   if (name === 'Levi') { av.style.background = '#0a7abf'; av.textContent = '👦'; }
-  else                  { av.style.background = '#e84393'; av.textContent = '👧'; }
+  else { av.style.background = '#e84393'; av.textContent = '👧'; }
   showScreen('screen-home');
   spawnHearts();
-  const homeEl = document.getElementById('screen-home');
-  homeEl.addEventListener('scroll', () => {
-    document.getElementById('nf-nav').classList.toggle('solid', homeEl.scrollTop > 60);
+  document.getElementById('screen-home').addEventListener('scroll', () => {
+    document.getElementById('nf-nav').classList.toggle('solid', document.getElementById('screen-home').scrollTop > 60);
   });
 }
 
-/* Hearts */
 function spawnHearts() {
-  const layer  = document.getElementById('heart-layer');
+  const layer = document.getElementById('heart-layer');
   const glyphs = ['❤️','💕','💖','🌹','✨','💫','💝','🥰'];
   for (let i = 0; i < 14; i++) {
     const h = document.createElement('div');
@@ -971,19 +601,16 @@ function spawnHearts() {
   }
 }
 
-/* Modal */
 function openModal() {
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeModal() {
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow = '';
   const v = document.querySelector('#modal video');
   if (v) v.pause();
 }
-
 document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
