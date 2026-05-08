@@ -571,7 +571,7 @@ function showScreen(id) {
 
 function goHome(name) {
   const av = document.getElementById('nav-avatar');
-  if (name === 'Levi') { av.style.background = '#0a7abf'; av.textContent = '👦'; }
+  if (name === 'Levi') { av.style.background = '#0a7abf'; av.innerHTML = '<img src="IMG_1791.jpg" alt="Levi" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;">';; }
   else { av.style.background = '#e84393'; av.innerHTML = '<img src="IMG_6378.JPG" alt="Lucy" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;">';; }
   showScreen('screen-home');
   document.body.classList.add('home-active');
