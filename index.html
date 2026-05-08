@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +34,6 @@ body.home-active { overflow-y:auto; }
 
 /* ══════════════════════════════════════════════
    NETFLIX INTRO — Authentic brush/ribbon animation
-   Based on the real Netflix CSS intro technique
 ══════════════════════════════════════════════ */
 #screen-intro {
   position: fixed; inset: 0;
@@ -81,7 +79,6 @@ netflixintro::before {
   transform-origin: left center;
 }
 
-/* N letter config */
 netflixintro[letter="N"] { transform-origin: 30% center; }
 
 netflixintro[letter="N"] .helper-1 {
@@ -121,7 +118,6 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
   animation-duration: 2s; animation-fill-mode: forwards; animation-delay: 0.5s;
 }
 
-/* shared helper styles */
 [class*="helper-"] { position: absolute; }
 
 .effect-brush {
@@ -177,17 +173,8 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
   animation-duration: 2s; animation-delay: 1.6s; animation-fill-mode: forwards;
 }
 
-[class*="lamp-"] {
-  position: absolute; display:block; height:100%;
-  box-shadow: 0px 0px 10px 0px rgba(228,9,19,0.75);
-  background: var(--color);
-}
-[class*="lamp-"]::before {
-  position:absolute; content:" "; display:block;
-  width:100%; height:100%;
-  background: var(--color);
-  box-shadow: 0px 0px 10px 0px rgba(228,9,19,0.75);
-}
+[class*="lamp-"] { position: absolute; display:block; height:100%; box-shadow: 0px 0px 10px 0px rgba(228,9,19,0.75); background: var(--color); }
+[class*="lamp-"]::before { position:absolute; content:" "; display:block; width:100%; height:100%; background: var(--color); box-shadow: 0px 0px 10px 0px rgba(228,9,19,0.75); }
 
 .lamp-1  { --color:#ff0100; left:0.7%;  width:1%;   }
 .lamp-2  { --color:#ffde01; left:2.2%;  width:1.4%; }
@@ -218,26 +205,18 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
 .lamp-27 { --color:#ff0036; left:92.4%; width:2.4%; }
 .lamp-28 { --color:#06f98c; left:96.2%; width:2.1%; }
 
-.lamp-1,.lamp-3,.lamp-5,.lamp-7,.lamp-9,.lamp-11,.lamp-13,.lamp-15,.lamp-17,.lamp-19,.lamp-21,.lamp-23,.lamp-25,.lamp-27 {
-  animation-name: lumieres-moving-left; animation-duration:5s; animation-fill-mode:forwards;
-}
-.lamp-1::before,.lamp-3::before,.lamp-5::before,.lamp-7::before,.lamp-9::before,.lamp-11::before,.lamp-13::before,.lamp-15::before,.lamp-17::before,.lamp-19::before,.lamp-21::before,.lamp-23::before,.lamp-25::before,.lamp-27::before {
-  animation-name: lumieres-moving-left; animation-duration:5.5s;
-}
-.lamp-2,.lamp-4,.lamp-6,.lamp-8,.lamp-10,.lamp-12,.lamp-14,.lamp-16,.lamp-18,.lamp-20,.lamp-22,.lamp-24,.lamp-26,.lamp-28 {
-  animation-name: lumieres-moving-right; animation-duration:5s; animation-fill-mode:forwards;
-}
-.lamp-2::before,.lamp-4::before,.lamp-6::before,.lamp-8::before,.lamp-10::before,.lamp-12::before,.lamp-14::before,.lamp-16::before,.lamp-18::before,.lamp-20::before,.lamp-22::before,.lamp-24::before,.lamp-26::before,.lamp-28::before {
-  animation-name: lumieres-moving-right; animation-duration:5.5s;
-}
+.lamp-1,.lamp-3,.lamp-5,.lamp-7,.lamp-9,.lamp-11,.lamp-13,.lamp-15,.lamp-17,.lamp-19,.lamp-21,.lamp-23,.lamp-25,.lamp-27 { animation-name: lumieres-moving-left; animation-duration:5s; animation-fill-mode:forwards; }
+.lamp-1::before,.lamp-3::before,.lamp-5::before,.lamp-7::before,.lamp-9::before,.lamp-11::before,.lamp-13::before,.lamp-15::before,.lamp-17::before,.lamp-19::before,.lamp-21::before,.lamp-23::before,.lamp-25::before,.lamp-27::before { animation-name: lumieres-moving-left; animation-duration:5.5s; }
+.lamp-2,.lamp-4,.lamp-6,.lamp-8,.lamp-10,.lamp-12,.lamp-14,.lamp-16,.lamp-18,.lamp-20,.lamp-22,.lamp-24,.lamp-26,.lamp-28 { animation-name: lumieres-moving-right; animation-duration:5s; animation-fill-mode:forwards; }
+.lamp-2::before,.lamp-4::before,.lamp-6::before,.lamp-8::before,.lamp-10::before,.lamp-12::before,.lamp-14::before,.lamp-16::before,.lamp-18::before,.lamp-20::before,.lamp-22::before,.lamp-24::before,.lamp-26::before,.lamp-28::before { animation-name: lumieres-moving-right; animation-duration:5.5s; }
 
-@keyframes brush-moving   { 0%{transform:translateY(0);} 100%{transform:translateY(-100%);} }
-@keyframes fading-out     { 0%{opacity:1;} 100%{opacity:0;} }
+@keyframes brush-moving          { 0%{transform:translateY(0);} 100%{transform:translateY(-100%);} }
+@keyframes fading-out            { 0%{opacity:1;} 100%{opacity:0;} }
 @keyframes lumieres-moving-right { 0%{transform:translate(0);} 40%{transform:translate(-10px) scaleX(1);} 50%{transform:translate(-60px);} 100%{transform:translate(-120px) scaleX(3);} }
 @keyframes lumieres-moving-left  { 0%{transform:translate(0);} 40%{transform:translate(10px) scaleX(1);}  50%{transform:translate(60px);}  100%{transform:translate(120px) scaleX(3);} }
-@keyframes zoom-in        { 0%{transform:scale(1);} 100%{transform:scale(15);} }
-@keyframes showing-lumieres { 0%{opacity:0;} 100%{opacity:1;} }
-@keyframes fading-lumieres-box { 0%{background-color:rgba(228,9,19,0.5);} 100%{background-color:rgba(228,9,19,0);} }
+@keyframes zoom-in               { 0%{transform:scale(1);} 100%{transform:scale(15);} }
+@keyframes showing-lumieres      { 0%{opacity:0;} 100%{opacity:1;} }
+@keyframes fading-lumieres-box   { 0%{background-color:rgba(228,9,19,0.5);} 100%{background-color:rgba(228,9,19,0);} }
 
 /* ══ PROFILES ══ */
 #screen-profiles { background:var(--dark); flex-direction:column; align-items:center; justify-content:center; gap:48px; position:relative; }
@@ -245,7 +224,7 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
 #screen-profiles h1 { font-size:34px; font-weight:400; }
 .profiles-row { display:flex; gap:24px; flex-wrap:wrap; justify-content:center; }
 .profile-item { display:flex; flex-direction:column; align-items:center; gap:14px; cursor:pointer; }
-.profile-item:hover .profile-pic  { border-color:white; }
+.profile-item:hover .profile-pic   { border-color:white; }
 .profile-item:hover .profile-label { color:white; }
 .profile-pic { width:clamp(90px,13vw,152px); height:clamp(90px,13vw,152px); border-radius:4px; border:3px solid transparent; display:flex; align-items:center; justify-content:center; font-size:clamp(36px,5vw,60px); transition:border-color 0.15s; overflow:hidden; }
 .profile-pic img { width:100%; height:100%; object-fit:cover; border-radius:2px; }
@@ -254,10 +233,7 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
 .manage-btn:hover { border-color:white; color:white; }
 
 /* ══ HOME ══ */
-/* The home screen is a normal block that fills the viewport.
-   We use document scroll (not element scroll) so position:fixed navbar works correctly. */
 #screen-home { flex-direction:column; background:var(--dark); min-height:100vh; width:100%; isolation:isolate; transform:none !important; overflow:visible; }
-
 .nf-nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; padding:0 4%; height:68px; background:linear-gradient(to bottom,rgba(0,0,0,0.9),transparent); transition:background 0.4s; }
 .nf-nav.solid { background:rgba(20,20,20,0.98); }
 .nf-nav-links { display:flex; gap:18px; margin-left:28px; list-style:none; }
@@ -286,7 +262,7 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
 .hero-btn.info { background:rgba(109,109,110,0.7); color:white; } .hero-btn.info:hover { background:rgba(109,109,110,0.4); }
 .nf-rows { padding:0 4% 60px; margin-top:-80px; position:relative; z-index:2; }
 .nf-row { margin-bottom:32px; }
-.nf-row-title { font-size:clamp(14px,2vw,20px); font-weight:700; color:var(--light); margin-bottom:12px; margin-top: 37px; display:inline-flex; align-items:center; gap:8px; }
+.nf-row-title { font-size:clamp(14px,2vw,20px); font-weight:700; color:var(--light); margin-bottom:12px; margin-top:37px; display:inline-flex; align-items:center; gap:8px; }
 .nf-row-title:hover .see-all { opacity:1; }
 .see-all { font-size:13px; color:#54b9c5; opacity:0; transition:opacity 0.15s; font-weight:400; letter-spacing:1px; }
 .nf-cards { display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; padding:20px 0; }
@@ -344,87 +320,33 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
   </div>
 </div>
 
-<!-- INTRO — Authentic Netflix animation -->
+<!-- INTRO -->
 <div id="screen-intro" class="screen">
   <div id="nf-intro-container">
     <netflixintro letter="N">
-
       <div class="helper-1">
         <div class="effect-brush">
-          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span>
-          <span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span>
-          <span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span>
-          <span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span>
-          <span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span>
-          <span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span>
-          <span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span>
-          <span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span>
-          <span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span>
-          <span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span>
-          <span class="fur-1"></span>
+          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span><span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span><span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span><span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span><span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span><span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span><span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span><span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span><span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span><span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span><span class="fur-1"></span>
         </div>
         <div class="effect-lumieres">
-          <span class="lamp-1"></span><span class="lamp-2"></span><span class="lamp-3"></span>
-          <span class="lamp-4"></span><span class="lamp-5"></span><span class="lamp-6"></span>
-          <span class="lamp-7"></span><span class="lamp-8"></span><span class="lamp-9"></span>
-          <span class="lamp-10"></span><span class="lamp-11"></span><span class="lamp-12"></span>
-          <span class="lamp-13"></span><span class="lamp-14"></span><span class="lamp-15"></span>
-          <span class="lamp-16"></span><span class="lamp-17"></span><span class="lamp-18"></span>
-          <span class="lamp-19"></span><span class="lamp-20"></span><span class="lamp-21"></span>
-          <span class="lamp-22"></span><span class="lamp-23"></span><span class="lamp-24"></span>
-          <span class="lamp-25"></span><span class="lamp-26"></span><span class="lamp-27"></span>
-          <span class="lamp-28"></span>
+          <span class="lamp-1"></span><span class="lamp-2"></span><span class="lamp-3"></span><span class="lamp-4"></span><span class="lamp-5"></span><span class="lamp-6"></span><span class="lamp-7"></span><span class="lamp-8"></span><span class="lamp-9"></span><span class="lamp-10"></span><span class="lamp-11"></span><span class="lamp-12"></span><span class="lamp-13"></span><span class="lamp-14"></span><span class="lamp-15"></span><span class="lamp-16"></span><span class="lamp-17"></span><span class="lamp-18"></span><span class="lamp-19"></span><span class="lamp-20"></span><span class="lamp-21"></span><span class="lamp-22"></span><span class="lamp-23"></span><span class="lamp-24"></span><span class="lamp-25"></span><span class="lamp-26"></span><span class="lamp-27"></span><span class="lamp-28"></span>
         </div>
       </div>
-
       <div class="helper-2">
         <div class="effect-brush">
-          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span>
-          <span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span>
-          <span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span>
-          <span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span>
-          <span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span>
-          <span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span>
-          <span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span>
-          <span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span>
-          <span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span>
-          <span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span>
-          <span class="fur-1"></span>
+          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span><span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span><span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span><span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span><span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span><span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span><span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span><span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span><span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span><span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span><span class="fur-1"></span>
         </div>
       </div>
-
       <div class="helper-3">
         <div class="effect-brush">
-          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span>
-          <span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span>
-          <span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span>
-          <span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span>
-          <span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span>
-          <span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span>
-          <span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span>
-          <span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span>
-          <span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span>
-          <span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span>
-          <span class="fur-1"></span>
+          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span><span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span><span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span><span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span><span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span><span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span><span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span><span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span><span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span><span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span><span class="fur-1"></span>
         </div>
       </div>
-
       <div class="helper-4">
         <div class="effect-brush">
-          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span>
-          <span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span>
-          <span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span>
-          <span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span>
-          <span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span>
-          <span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span>
-          <span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span>
-          <span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span>
-          <span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span>
-          <span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span>
-          <span class="fur-1"></span>
+          <span class="fur-31"></span><span class="fur-30"></span><span class="fur-29"></span><span class="fur-28"></span><span class="fur-27"></span><span class="fur-26"></span><span class="fur-25"></span><span class="fur-24"></span><span class="fur-23"></span><span class="fur-22"></span><span class="fur-21"></span><span class="fur-20"></span><span class="fur-19"></span><span class="fur-18"></span><span class="fur-17"></span><span class="fur-16"></span><span class="fur-15"></span><span class="fur-14"></span><span class="fur-13"></span><span class="fur-12"></span><span class="fur-11"></span><span class="fur-10"></span><span class="fur-9"></span><span class="fur-8"></span><span class="fur-7"></span><span class="fur-6"></span><span class="fur-5"></span><span class="fur-4"></span><span class="fur-3"></span><span class="fur-2"></span><span class="fur-1"></span>
         </div>
       </div>
-
     </netflixintro>
   </div>
 </div>
@@ -436,18 +358,37 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
   </div>
   <h1>Who's watching?</h1>
   <div class="profiles-row">
+
+    <!-- ══════════════════════════════════════
+         PROFILE PHOTO — LEVI
+         To use a real photo:
+         1. Put your photo (e.g. levi.jpg) in the same folder as this HTML file
+         2. Replace the <span>👦</span> below with: <img src="levi.jpg" alt="Levi">
+         3. You can delete the background gradient style too if you want
+    ══════════════════════════════════════ -->
     <div class="profile-item" onclick="goHome('Levi')">
       <div class="profile-pic" style="background:linear-gradient(135deg,#0a7abf,#034f84);">
         <span>👦</span>
+        <!-- REPLACE WITH: <img src="levi.jpg" alt="Levi"> -->
       </div>
       <div class="profile-label">Levi</div>
     </div>
+
+    <!-- ══════════════════════════════════════
+         PROFILE PHOTO — LUCY
+         To use a real photo:
+         1. Put your photo (e.g. lucy.jpg) in the same folder as this HTML file
+         2. Replace the <span>👧</span> below with: <img src="lucy.jpg" alt="Lucy">
+         3. You can delete the background gradient style too if you want
+    ══════════════════════════════════════ -->
     <div class="profile-item" onclick="goHome('Lucy')">
       <div class="profile-pic" style="background:linear-gradient(135deg,#e84393,#a5004e);">
         <span>👧</span>
+        <!-- REPLACE WITH: <img src="lucy.jpg" alt="Lucy"> -->
       </div>
       <div class="profile-label">Lucy</div>
     </div>
+
   </div>
   <button class="manage-btn">Manage Profiles</button>
 </div>
@@ -466,8 +407,18 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
       <div class="nf-nav-avatar" id="nav-avatar" style="background:#0a7abf;">👦</div>
     </div>
   </nav>
+
   <div class="nf-hero">
-    <div class="nf-hero-img">💑</div>
+    <!-- ══════════════════════════════════════
+         HERO BACKGROUND PHOTO
+         To use a real photo as the big hero background:
+         1. Put your photo (e.g. hero.jpg) in the same folder
+         2. Replace the 💑 emoji below with: <img src="hero.jpg" alt="Us">
+    ══════════════════════════════════════ -->
+    <div class="nf-hero-img">
+      💑
+      <!-- REPLACE WITH: <img src="hero.jpg" alt="Us"> -->
+    </div>
     <div class="hero-vignette"></div>
     <div class="heart-layer" id="heart-layer"></div>
     <div class="nf-hero-content">
@@ -482,12 +433,22 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
       </div>
     </div>
   </div>
+
   <div class="nf-rows">
     <div class="nf-row">
       <div class="nf-row-title">Our Timeline <span class="see-all">Explore All &rsaquo;</span></div>
       <div class="nf-cards">
+
+        <!-- ══════════════════════════════════════
+             CARD THUMBNAIL PHOTO — 1 Month
+             To use a real photo on the card:
+             Replace the 💑 emoji inside .card-thumb with: <img src="month1.jpg" alt="1 Month">
+        ══════════════════════════════════════ -->
         <div class="nf-card" onclick="openModal()">
-          <div class="card-thumb" style="background:linear-gradient(135deg,#c0392b,#8e44ad);">💑</div>
+          <div class="card-thumb" style="background:linear-gradient(135deg,#c0392b,#8e44ad);">
+            💑
+            <!-- REPLACE WITH: <img src="month1.jpg" alt="1 Month"> -->
+          </div>
           <div class="card-detail">
             <div class="card-detail-btns">
               <button class="cd-btn play" onclick="event.stopPropagation();openModal()">▶</button>
@@ -497,17 +458,22 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
             <div class="cd-match">99% Match</div><div class="cd-title">1 Month Together</div><div class="cd-meta">Romance · 2025</div>
           </div>
         </div>
+
         <div class="nf-card"><div class="card-thumb" style="background:#1a1a1a;"><div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div></div><div class="card-detail"><div class="cd-title">3 Months Together</div><div class="cd-meta" style="color:#e87c03;">🔒 Locked</div></div></div>
         <div class="nf-card"><div class="card-thumb" style="background:#1a1a1a;"><div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div></div><div class="card-detail"><div class="cd-title">6 Months Together</div><div class="cd-meta" style="color:#e87c03;">🔒 Locked</div></div></div>
         <div class="nf-card"><div class="card-thumb" style="background:#1a1a1a;"><div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div></div><div class="card-detail"><div class="cd-title">1 Year Together 💍</div><div class="cd-meta" style="color:#e87c03;">🔒 Locked</div></div></div>
         <div class="nf-card"><div class="card-thumb" style="background:#1a1a1a;"><div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">Coming Soon</span></div></div><div class="card-detail"><div class="cd-title">2 Years Together ✨</div><div class="cd-meta" style="color:#e87c03;">🔒 Locked</div></div></div>
       </div>
     </div>
+
     <div class="nf-row">
       <div class="nf-row-title">💝 Favourites</div>
       <div class="nf-cards">
         <div class="nf-card" onclick="openModal()">
-          <div class="card-thumb" style="background:linear-gradient(135deg,#f093fb,#f5576c);">🌹</div>
+          <div class="card-thumb" style="background:linear-gradient(135deg,#f093fb,#f5576c);">
+            🌹
+            <!-- REPLACE WITH: <img src="favourite1.jpg" alt="Favourite"> -->
+          </div>
           <div class="card-detail"><div class="card-detail-btns"><button class="cd-btn play">▶</button><button class="cd-btn outline">+</button></div><div class="cd-title">The Beginning</div><div class="cd-meta">Where it all started</div></div>
         </div>
         <div class="nf-card"><div class="card-thumb" style="background:#1a1a1a;"><div class="lock-veil"><span class="lk-icon">🔒</span><span class="lk-text">More to come...</span></div></div><div class="card-detail"><div class="cd-title">More Memories</div><div class="cd-meta" style="color:#e87c03;">🔒 Add yours soon</div></div></div>
@@ -543,11 +509,17 @@ netflixintro[letter="N"] .helper-2 .effect-brush {
 </div>
 
 <script>
-const SECRET = '090426';
+const SECRET_HASH = '4f3e0f4d9a4b3f000acce6c3280c4424cdb70dc73c8d02b42d627e3c5ab88be5';
 
-function checkPW() {
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function checkPW() {
   const val = document.getElementById('pw-input').value.trim();
-  if (val === SECRET) {
+  const hash = await sha256(val);
+  if (hash === SECRET_HASH) {
     showIntro();
   } else {
     const input = document.getElementById('pw-input');
@@ -557,30 +529,25 @@ function checkPW() {
     setTimeout(() => { input.classList.remove('shake'); err.textContent = ''; }, 3000);
   }
 }
+
 document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPW(); });
+document.querySelector('.pw-btn').addEventListener('click', checkPW);
 
 function showIntro() {
-  // Reset any leftover transform from a previous run
-  const nfi = document.querySelector("netflixintro");
-  if (nfi) { nfi.style.animation = "none"; nfi.style.transform = "none"; }
-  void document.getElementById("screen-intro").offsetWidth; // force reflow
-  if (nfi) { nfi.style.animation = ""; nfi.style.transform = ""; }
+  const nfi = document.querySelector('netflixintro');
+  if (nfi) { nfi.style.animation = 'none'; nfi.style.transform = 'none'; }
+  void document.getElementById('screen-intro').offsetWidth;
+  if (nfi) { nfi.style.animation = ''; nfi.style.transform = ''; }
   document.getElementById('screen-password').style.display = 'none';
   const el = document.getElementById('screen-intro');
   el.style.display = 'flex';
   el.classList.add('active');
-  // The zoom-in animation runs for 4s total (0.5s delay + 3.5s duration)
-  // After it finishes, fade to profiles
   setTimeout(() => {
     el.style.transition = 'opacity 0.5s ease';
     el.style.opacity = '0';
     setTimeout(() => {
-      // Kill the zoom animation so it doesn't bleed into the next screen
       const nfi = el.querySelector('netflixintro');
-      if (nfi) {
-        nfi.style.animation = 'none';
-        nfi.style.transform = 'scale(1)';
-      }
+      if (nfi) { nfi.style.animation = 'none'; nfi.style.transform = 'scale(1)'; }
       el.style.display = 'none';
       el.style.opacity = '1';
       el.style.transition = '';
@@ -607,18 +574,7 @@ function goHome(name) {
   window.addEventListener('scroll', () => {
     document.getElementById('nf-nav').classList.toggle('solid', window.scrollY > 60);
   });
-}
 
-function spawnHearts() {
-  const layer = document.getElementById('heart-layer');
-  const glyphs = ['❤️','💕','💖','🌹','✨','💫','💝','🥰'];
-  for (let i = 0; i < 14; i++) {
-    const h = document.createElement('div');
-    h.className = 'hrt';
-    h.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
-    h.style.cssText = `left:${Math.random()*100}%;font-size:${14+Math.random()*18}px;animation-duration:${7+Math.random()*9}s;animation-delay:${Math.random()*7}s;`;
-    layer.appendChild(h);
-  }
 }
 
 function openModal() {
